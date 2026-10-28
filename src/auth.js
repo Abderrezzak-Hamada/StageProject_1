@@ -1,13 +1,18 @@
-// src/auth.js
 const USERS_KEY = "users";
 const SESSION_KEY = "huidigeGebruiker";
 
+const schoon = (email) => email.trim().toLowerCase();
+
 function getUsers() {
-  return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+  try {
+    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+  } catch {
+    return [];
+  }
 }
 
-// Registratie (voor later)
 export function registreer(email, wachtwoord) {
+  email = schoon(email);
   const users = getUsers();
   if (users.some((u) => u.email === email)) {
     return { ok: false, fout: "Dit e-mailadres bestaat al" };
@@ -17,8 +22,8 @@ export function registreer(email, wachtwoord) {
   return { ok: true };
 }
 
-// Inloggen
 export function login(email, wachtwoord) {
+  email = schoon(email);
   const user = getUsers().find(
     (u) => u.email === email && u.wachtwoord === wachtwoord
   );
@@ -27,12 +32,14 @@ export function login(email, wachtwoord) {
   return { ok: true };
 }
 
-// Uitloggen (voor later)
 export function logout() {
   localStorage.removeItem(SESSION_KEY);
 }
 
-// Wie is ingelogd?
 export function getHuidigeGebruiker() {
-  return JSON.parse(localStorage.getItem(SESSION_KEY));
+  try {
+    return JSON.parse(localStorage.getItem(SESSION_KEY));
+  } catch {
+    return null;
+  }
 }

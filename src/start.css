@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+.start {
+  --tekst: #1c2233;
+  --tekst-zacht: #555b68;
+  --rand: #1c2233;
+  --rand-zacht: #d4d6db;
+  --bg: #f6f5f3;
+  --kaart: #ffffff;
+  --blauw: #51627f;
+  --oranje: #c95a00;
+  --rood: #c9141f;
+  --primair: #3d4f6e;
+
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--tekst);
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.start * { box-sizing: border-box; }
+
+.start-kop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: #fff;
+  border-bottom: 1px solid var(--rand-zacht);
+}
+.start-kop h1 { font-size: 24px; font-weight: 700; margin: 0; }
+
+.maand-knop {
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 18px;
+  color: var(--tekst);
+  cursor: pointer;
+}
+
+.start-inhoud {
+  flex: 1;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kaart {
+  background: var(--kaart);
+  border: 1px solid var(--rand-zacht);
+  border-radius: 8px;
+  padding: 20px;
+}
+.saldo-kaart { border-color: var(--rand); }
+
+.label { margin: 0; font-size: 18px; color: var(--tekst-zacht); }
+.saldo { margin: 6px 0 20px; font-size: 48px; font-weight: 700; line-height: 1.1; }
+
+.saldo-vakken { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.vak {
+  border: 1px solid var(--rand-zacht);
+  border-radius: 4px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.vak span { font-size: 15px; color: var(--tekst-zacht); }
+.vak strong { font-size: 18px; }
+
+.kaart-kop { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.kaart-kop h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.kaart-kop a { color: var(--primair); font-size: 17px; }
+
+.budget { margin-bottom: 18px; }
+.budget:last-child { margin-bottom: 0; }
+.budget-rij { display: flex; justify-content: space-between; font-size: 17px; margin-bottom: 8px; }
+
+.balk { height: 12px; background: #e4e5e9; border-radius: 6px; overflow: hidden; }
+.balk-vulling { height: 100%; border-radius: 6px; }
+.balk-vulling.blauw { background: var(--blauw); }
+.balk-vulling.oranje { background: var(--oranje); }
+.balk-vulling.rood { background: var(--rood); }
+
+.transacties { list-style: none; margin: 0; padding: 0; }
+.transacties li {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-top: 1px solid var(--rand-zacht);
+  font-size: 17px;
+}
+.transacties li:last-child { padding-bottom: 0; }
+
+.leeg { color: var(--tekst-zacht); margin: 0; }
+
+.knop-rij { display: flex; justify-content: flex-end; }
+.knop-primair {
+  background: var(--primair);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 18px 28px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.onderbalk {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 28px;
+  background: #fff;
+  border-top: 1px solid var(--rand-zacht);
+  position: sticky;
+  bottom: 0;
+}
+.onderbalk a { color: var(--tekst); text-decoration: none; font-size: 17px; }
+.onderbalk a.actief { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
+
+.start :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
+
+@media (max-width: 420px) {
+  .saldo { font-size: 40px; }
+  .onderbalk { padding: 20px 14px; }
+  .onderbalk a { font-size: 15px; }
+}
