@@ -1,12 +1,32 @@
 import { useState } from "react";
-import { login } from "./auth";
+import { login, registreer } from "../auth.js";
 import "./login.css";
  
-export default function Login({ onLogin, onNaarRegistratie }) {
+export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [wachtwoord, setWachtwoord] = useState("");
   const [fouten, setFouten] = useState({});
- 
+
+  function handleTestLogin() {
+    const testEmail = "test@budget.local";
+    const testWachtwoord = "BudgetTest123!";
+    const registratie = registreer(testEmail, testWachtwoord);
+
+    if (!registratie.ok && registratie.fout !== "Dit e-mailadres bestaat al") {
+      setFouten({ algemeen: registratie.fout });
+      return;
+    }
+
+    const result = login(testEmail, testWachtwoord);
+    if (!result.ok) {
+      setFouten({ algemeen: result.fout });
+      return;
+    }
+
+    setFouten({});
+    onLogin?.();
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const f = {};
@@ -57,18 +77,16 @@ export default function Login({ onLogin, onNaarRegistratie }) {
         />
         {fouten.wachtwoord && <span className="login-fout">{fouten.wachtwoord}</span>}
  
-        <a
-          className="login-link"
-          href="#registreren"
-          onClick={(e) => {
-            e.preventDefault();
-            onNaarRegistratie?.();
-          }}
-        >
-          Account aanmaken.
-        </a>
- 
         <button type="submit" className="login-knop">Inloggen</button>
+        {import.meta.env.DEV && (
+          <button
+            type="button"
+            className="login-testknop"
+            onClick={handleTestLogin}
+          >
+            Inloggen met testaccount
+          </button>
+        )}
       </form>
     </div>
   );

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { logout } from "./auth";
 import "./start.css";
  
 const MAANDEN = [
@@ -87,7 +86,7 @@ function balkKleur(besteed, max) {
   return "blauw";
 }
  
-export default function Start({ onLogout }) {
+export default function Start({ onNaarUitloggen }) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
  
@@ -107,8 +106,7 @@ export default function Start({ onLogout }) {
  
   function handleLogout(e) {
     e.preventDefault();
-    logout();
-    onLogout?.();
+    onNaarUitloggen?.();
   }
  
   return (

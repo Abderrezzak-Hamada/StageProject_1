@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Uitloggen.css";
+import "./uitlog.css";
 
 function Knop({ variant = "primair", children, ...props }) {
   return (

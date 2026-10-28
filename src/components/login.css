@@ -109,7 +109,21 @@
   cursor: pointer;
 }
 .login-knop:hover { background: #33435e; }
- 
+
+.login-testknop {
+  margin-top: 12px;
+  min-height: 48px;
+  background: #fff;
+  color: var(--primair);
+  border: 1px solid var(--primair);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.login-testknop:hover { background: #f0f1f3; }
+
 .login :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
  
 @media (max-width: 420px) {

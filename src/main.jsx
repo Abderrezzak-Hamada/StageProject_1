@@ -1,10 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Login from "./login";
- 
+import App from "./App.jsx";
+import "./app.css";
+
 createRoot(document.getElementById("app")).render(
   <StrictMode>
-    <Login onLogin={(data) => console.log("login", data)} />
+    <App />
   </StrictMode>
 );
  
