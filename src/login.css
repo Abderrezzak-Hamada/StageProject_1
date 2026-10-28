@@ -1,110 +1,118 @@
-:root {
-  --bg: #f8f8f6;
-  --card: #ffffff;
-  --ink: #1b2130;
-  --muted: #5f6672;
-  --border: #d9d9d9;
-  --field-border: #8f9399;
-  --brand: #3d5070;
-}
- 
-* { box-sizing: border-box; }
- 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
  
 .login {
-  max-width: 440px;
-  margin: 0 auto;
-  padding: 112px 20px 48px;
-  text-align: center;
-}
+  --tekst: #1c2233;
+  --zacht: #5b616e;
+  --rand: #8c909a;
+  --primair: #3d4f6e;
+  --fout: #c9141f;
  
-.login__logo {
-  display: grid;
-  place-items: center;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--tekst);
+  background: #f6f5f3;
+  min-height: 100vh;
+  padding: 90px 18px 40px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.login * { box-sizing: border-box; }
+ 
+.login-kop { text-align: center; }
+ 
+.login-logo {
   width: 68px;
   height: 68px;
-  margin: 0 auto 32px;
-  background: var(--brand);
+  margin: 0 auto;
+  background: var(--primair);
+  border: 1px solid #2c3b57;
+  border-radius: 6px;
   color: #fff;
   font-size: 32px;
   font-weight: 700;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
  
-.login__title {
-  margin: 0 0 12px;
+.login-kop h1 {
+  margin: 34px 0 0;
   font-size: 32px;
   font-weight: 700;
 }
- 
-.login__subtitle {
-  margin: 0 0 32px;
-  color: var(--muted);
+.login-kop p {
+  margin: 22px 0 28px;
   font-size: 17px;
+  color: var(--zacht);
 }
  
-.login__card {
+.login-kaart {
+  background: #fff;
+  border: 1px solid #cfd1d6;
+  border-radius: 6px;
+  padding: 28px 28px 32px;
   display: flex;
   flex-direction: column;
-  padding: 28px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-align: left;
 }
  
-.login__label {
-  margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 16px;
+.login-kaart label {
+  font-size: 17px;
+  color: var(--zacht);
+  margin-bottom: 10px;
 }
  
-.login__input {
-  height: 62px;
-  margin-bottom: 24px;
-  padding: 0 18px;
-  border: 1px solid var(--field-border);
-  border-radius: 6px;
-  font: inherit;
-  font-size: 18px;
-  color: var(--ink);
-  background: #fff;
-}
- 
-.login__input::placeholder { color: var(--muted); }
- 
-.login__input:focus-visible,
-.login__button:focus-visible,
-.login__link:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--brand) 40%, transparent);
-  outline-offset: 2px;
-}
- 
-.login__link {
-  align-self: flex-end;
-  margin: -4px 0 24px;
-  color: var(--brand);
-  font-size: 16px;
-  text-decoration: underline;
-}
- 
-.login__button {
+.login-kaart input {
+  width: 100%;
   height: 64px;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 19px;
+  color: var(--tekst);
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+.login-kaart input::placeholder { color: var(--zacht); opacity: 1; }
+.login-kaart input[aria-invalid="true"] { border-color: var(--fout); margin-bottom: 6px; }
+ 
+.login-fout {
+  color: var(--fout);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.login-melding {
+  margin: 0 0 22px;
+  padding: 12px 14px;
+  border: 1px solid var(--fout);
+  border-radius: 6px;
+  color: var(--fout);
+  font-size: 15px;
+}
+ 
+.login-link {
+  align-self: flex-end;
+  color: var(--tekst);
+  font-size: 17px;
+  text-decoration: underline;
+  margin: -2px 0 26px;
+}
+ 
+.login-knop {
+  height: 66px;
+  background: var(--primair);
+  color: #fff;
   border: 0;
   border-radius: 6px;
-  background: var(--brand);
-  color: #fff;
   font: inherit;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
+.login-knop:hover { background: #33435e; }
  
-.login__button:hover { background: #33445f; }
+.login :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
  
+@media (max-width: 420px) {
+  .login { padding-top: 60px; }
+  .login-kaart { padding: 22px 18px 26px; }
+}
