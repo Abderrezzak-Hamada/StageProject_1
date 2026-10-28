@@ -110,7 +110,8 @@
 }
 .login-knop:hover { background: #33435e; }
 
-.login-testknop {
+.login-testknop,
+.register-knop {
   margin-top: 12px;
   min-height: 48px;
   background: #fff;
@@ -122,7 +123,8 @@
   font-weight: 600;
   cursor: pointer;
 }
-.login-testknop:hover { background: #f0f1f3; }
+.login-testknop:hover,
+.register-knop:hover { background: #f0f1f3; }
 
 .login :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
  

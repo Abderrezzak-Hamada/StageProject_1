@@ -2,7 +2,7 @@ import { useState } from "react";
 import { login, registreer } from "../auth.js";
 import "./login.css";
  
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, onNaarRegistreren }) {
   const [email, setEmail] = useState("");
   const [wachtwoord, setWachtwoord] = useState("");
   const [fouten, setFouten] = useState({});
@@ -87,6 +87,14 @@ export default function Login({ onLogin }) {
             Inloggen met testaccount
           </button>
         )}
+
+         <button
+            type="button"
+            className="register-knop"
+            onClick={() => onNaarRegistreren?.()}
+          >
+            Registreren
+          </button>
       </form>
     </div>
   );

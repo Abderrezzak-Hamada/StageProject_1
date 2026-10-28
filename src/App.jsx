@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { getHuidigeGebruiker, logout } from "./auth.js";
+import { getHuidigeGebruiker, login, logout, registreer } from "./auth.js";
 import Login from "./components/Login.jsx";
+import SignUp from "./components/signup.jsx";
 import Start from "./components/Start.jsx";
 import Uitloggen from "./components/Uitloggen.jsx";
 
@@ -13,9 +14,29 @@ export default function App() {
     setPagina("start");
   }
 
+  function handleRegister({ email, password }) {
+    const registratie = registreer(email, password);
+    if (!registratie.ok) return registratie;
+
+    const loginResultaat = login(email, password);
+    if (!loginResultaat.ok) return loginResultaat;
+
+    handleLogin();
+    return { ok: true };
+  }
+
   function handleUitloggen() {
     logout();
     setPagina("login");
+  }
+
+  if (pagina === "signup") {
+    return (
+      <SignUp
+        onRegister={handleRegister}
+        onLogin={() => setPagina("login")}
+      />
+    );
   }
 
   if (pagina === "start") {
@@ -31,5 +52,10 @@ export default function App() {
     );
   }
 
-  return <Login onLogin={handleLogin} />;
+  return (
+    <Login
+      onLogin={handleLogin}
+      onNaarRegistreren={() => setPagina("signup")}
+    />
+  );
 }
