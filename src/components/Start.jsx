@@ -86,7 +86,7 @@ function balkKleur(besteed, max) {
   return "blauw";
 }
  
-export default function Start({ onNaarUitloggen }) {
+export default function Start({ onNaarTransactie, onNaarUitloggen }) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
  
@@ -178,7 +178,9 @@ export default function Start({ onNaarUitloggen }) {
         </section>
  
         <div className="knop-rij">
-          <button className="knop-primair">+ Transactie</button>
+          <button className="knop-primair" onClick={onNaarTransactie}>
+            + Transactie
+          </button>
         </div>
       </main>
  
