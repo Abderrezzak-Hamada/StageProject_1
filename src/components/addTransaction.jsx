@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./transaction.css";
+import "./addTransaction.css";
 
 const vandaag = () => new Date().toLocaleDateString("sv-SE"); // JJJJ-MM-DD
 const mooieDatum = (iso) =>
@@ -31,6 +31,7 @@ function Veld({ id, label, fout, children }) {
 
 export default function TransactieToevoegen({
   categorieen = ["Boodschappen", "Wonen", "Vervoer", "Uitgaan", "Abonnementen"],
+  inkomenscategorieen = ["Salaris", "Studiefinanciering", "Toeslagen", "Freelance", "Overig"],
   beginwaarden = {},
   toonFoutenMeteen = false,
   onOpslaan,
@@ -46,6 +47,7 @@ export default function TransactieToevoegen({
   const [bezig, setBezig] = useState(false);
   const [serverFout, setServerFout] = useState("");
 
+  const beschikbareCategorieen = type === "inkomst" ? inkomenscategorieen : categorieen;
   const centen = naarCenten(bedrag);
   const fouten = {
     bedrag: centen > 0 ? "" : "Vul een bedrag in dat groter is dan 0",
@@ -91,7 +93,10 @@ export default function TransactieToevoegen({
                 type="button"
                 aria-pressed={type === t}
                 className={type === t ? "tv-type--actief" : ""}
-                onClick={() => setType(t)}
+                onClick={() => {
+                  setType(t);
+                  setCategorie("");
+                }}
               >
                 {t === "uitgave" ? "Uitgave" : "Inkomst"}
               </button>
@@ -123,7 +128,7 @@ export default function TransactieToevoegen({
               <option value="" hidden>
                 Kies een categorie ▾
               </option>
-              {categorieen.map((c) => (
+              {beschikbareCategorieen.map((c) => (
                 <option key={c} value={c}>
                   {c}
                 </option>

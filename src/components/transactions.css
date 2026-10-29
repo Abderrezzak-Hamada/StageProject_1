@@ -1,0 +1,170 @@
+.transacties-pagina {
+  --tekst: #071b36;
+  --zacht: #536981;
+  --rand: #c9cdd2;
+  --achtergrond: #f7f7f6;
+  --primair: #3d5170;
+  min-height: 100vh;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--achtergrond);
+  color: var(--tekst);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.transacties-pagina * { box-sizing: border-box; }
+
+.transacties-kop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 30px;
+  background: #fff;
+  border-bottom: 1px solid var(--rand);
+}
+
+.transacties-kop h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--tekst);
+}
+
+.transacties-maandknop {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--tekst);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--tekst);
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.transacties-inhoud { padding: 25px 30px 20px; }
+.zoek-label { display: block; margin-bottom: 10px; color: var(--zacht); font-size: 16px; }
+.zoekveld {
+  width: 100%;
+  height: 63px;
+  padding: 0 18px;
+  border: 1px solid #878d96;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--tekst);
+  font: inherit;
+  font-size: 19px;
+}
+.zoekveld::placeholder { color: #53606e; opacity: 1; }
+
+.transactie-filters { display: flex; gap: 11px; margin: 18px 0; }
+.filterknop {
+  min-height: 55px;
+  padding: 0 21px;
+  border: 1px solid var(--tekst);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--tekst);
+  font: inherit;
+  font-size: 17px;
+  cursor: pointer;
+}
+.filterknop.actief { background: #202938; color: #fff; font-weight: 700; }
+
+.inkomsten-totaal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 20px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: #fff;
+}
+.inkomsten-totaal span { color: #53606e; font-size: 16px; }
+.inkomsten-totaal strong { color: var(--tekst); font-size: 32px; line-height: 1.15; }
+
+.categorie-totaal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 17px;
+  padding: 20px;
+  border: 1px solid var(--tekst);
+  border-radius: 8px;
+  background: #fff;
+}
+.categorie-totaal span { color: #53606e; font-size: 16px; }
+.categorie-totaal strong { color: var(--tekst); font-size: 32px; line-height: 1.15; }
+.categorie-overzicht {
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: #fff;
+}
+.categorie-overzicht-kop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #dfe1e3;
+}
+.categorie-overzicht-kop h2 { margin: 0; font-size: 18px; }
+.categorie-overzicht-kop span { color: var(--zacht); font-size: 15px; }
+.categorie-regel { padding: 19px 0 17px; border-bottom: 1px solid #dfe1e3; }
+.categorie-regel:last-child { border-bottom: 0; padding-bottom: 0; }
+.categorie-regel-kop {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 12px;
+}
+.categorie-regel-kop strong { font-size: 18px; }
+.categorie-regel-kop span { font-size: 17px; }
+.categorie-regel-kop small { min-width: 34px; color: var(--zacht); font-size: 15px; text-align: right; }
+.categorie-balk { height: 14px; overflow: hidden; border-radius: 999px; background: #e1e4e9; }
+.categorie-balk span { display: block; height: 100%; border-radius: inherit; background: #536981; }
+.categorie-beheren {
+  width: 100%;
+  min-height: 65px;
+  margin-top: 17px;
+  border: 1px solid var(--tekst);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--tekst);
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.transacties-meta { display: flex; justify-content: space-between; align-items: center; margin: 0 0 17px; color: var(--zacht); font-size: 16px; }
+.transacties-meta button { padding: 0; border: 0; background: transparent; color: #244b78; font: inherit; text-decoration: underline; cursor: pointer; }
+.transacties-lijst { overflow: hidden; border: 1px solid var(--rand); border-radius: 8px; background: #fff; }
+.transactie-regel { padding: 20px; }
+.transactie-regel + .transactie-regel { padding-top: 0; }
+.transactie-datum { display: block; margin-bottom: 17px; color: #536981; font-size: 15px; text-transform: uppercase; }
+.transactie-details { display: flex; justify-content: space-between; gap: 15px; padding-bottom: 13px; border-bottom: 1px solid #dfe1e3; font-size: 18px; }
+.transactie-regel:last-child .transactie-details { border-bottom: 0; padding-bottom: 0; }
+.bedrag { white-space: nowrap; font-size: 19px; }
+.bedrag.positief { color: var(--tekst); }
+.transacties-leeg { margin: 0; padding: 25px 20px; color: var(--zacht); }
+.transacties-hint { margin: 20px 0 53px; color: var(--zacht); font-size: 16px; }
+.transactie-actie { display: flex; justify-content: flex-end; }
+.categorie-overzicht + .categorie-beheren + .transactie-actie { margin-top: 53px; }
+.transactie-toevoegen { padding: 18px 29px; border: 0; border-radius: 8px; background: var(--primair); color: #fff; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
+
+.transacties-onderbalk { display: flex; justify-content: space-between; padding: 24px 44px; border-top: 1px solid var(--rand); background: #fff; }
+.transacties-onderbalk button { border: 0; background: transparent; color: var(--tekst); font: inherit; font-size: 17px; cursor: pointer; }
+.transacties-onderbalk .actief { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
+.transacties-pagina :focus-visible { outline: 3px solid #315c9b; outline-offset: 2px; }
+
+@media (max-width: 540px) {
+  .transacties-kop, .transacties-inhoud { padding-left: 20px; padding-right: 20px; }
+  .filterknop { padding: 0 12px; font-size: 15px; }
+  .transacties-onderbalk { padding-left: 14px; padding-right: 14px; }
+  .transacties-onderbalk button { font-size: 14px; }
+}

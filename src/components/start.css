@@ -79,7 +79,7 @@
 
 .kaart-kop { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
 .kaart-kop h2 { margin: 0; font-size: 18px; font-weight: 700; }
-.kaart-kop a { color: var(--primair); font-size: 17px; }
+.kaart-link { padding: 0; border: 0; background: transparent; color: var(--primair); font: inherit; font-size: 17px; cursor: pointer; }
 
 .budget { margin-bottom: 18px; }
 .budget:last-child { margin-bottom: 0; }
@@ -125,7 +125,8 @@
   position: sticky;
   bottom: 0;
 }
-.onderbalk a { color: var(--tekst); text-decoration: none; font-size: 17px; }
+.onderbalk a, .onderbalk button { color: var(--tekst); text-decoration: none; font-size: 17px; }
+.onderbalk button { padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; }
 .onderbalk a.actief { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
 
 .start :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
