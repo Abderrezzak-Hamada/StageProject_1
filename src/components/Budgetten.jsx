@@ -57,7 +57,12 @@ function waarschuwing(budgetten) {
   return delen.length ? `Let op: ${delen.join(" en ")}.` : "";
 }
 
-export default function Budgetten({ onNaarUitloggen }) {
+export default function Budgetten({
+  onNaarStart,
+  onNaarTransacties,
+  onNaarSparen,
+  onNaarUitloggen,
+}) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
   const [alleBudgetten, setAlleBudgetten] = useState(BEGINDATA);
@@ -126,6 +131,13 @@ export default function Budgetten({ onNaarUitloggen }) {
   function handleLogout(e) {
     e.preventDefault();
     onNaarUitloggen?.();
+  }
+
+  function nav(fn) {
+    return (e) => {
+      e.preventDefault();
+      fn?.();
+    };
   }
 
   return (
@@ -220,10 +232,10 @@ export default function Budgetten({ onNaarUitloggen }) {
       </main>
 
       <nav className="onderbalk">
-        <a href="#start">Start</a>
-        <a href="#transacties">Transacties</a>
+        <a href="#start" onClick={nav(onNaarStart)}>Start</a>
+        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
         <a href="#budgetten" className="actief">Budgetten</a>
-        <a href="#sparen">Sparen</a>
+        <a href="#sparen" onClick={nav(onNaarSparen)}>Sparen</a>
         <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
       </nav>
     </div>

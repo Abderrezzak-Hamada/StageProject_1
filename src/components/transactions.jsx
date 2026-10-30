@@ -47,6 +47,8 @@ export const voorbeeldTransacties = [
 export default function Transacties({
   transacties = voorbeeldTransacties,
   onNaarStart,
+  onNaarBudgetten,
+  onNaarSparen,
   onNaarTransactie,
   onNaarUitloggen,
   onNaarSorteren,
@@ -240,8 +242,8 @@ export default function Transacties({
       <nav className="transacties-onderbalk" aria-label="Hoofdnavigatie">
         <button type="button" onClick={onNaarStart}>Start</button>
         <button type="button" className="actief">Transacties</button>
-        <button type="button">Budgetten</button>
-        <button type="button">Sparen</button>
+        <button type="button" onClick={onNaarBudgetten}>Budgetten</button>
+        <button type="button" onClick={onNaarSparen}>Sparen</button>
         <button type="button" onClick={onNaarUitloggen}>Uitloggen</button>
       </nav>
     </div>

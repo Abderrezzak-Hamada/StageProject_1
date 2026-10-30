@@ -86,7 +86,13 @@ function balkKleur(besteed, max) {
   return "blauw";
 }
  
-export default function Start({ onNaarBudgetten, onNaarTransactie, onNaarTransacties, onNaarUitloggen }) {
+export default function Start({
+  onNaarBudgetten,
+  onNaarTransactie,
+  onNaarTransacties,
+  onNaarSparen,
+  onNaarUitloggen,
+}) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
  
@@ -112,6 +118,13 @@ export default function Start({ onNaarBudgetten, onNaarTransactie, onNaarTransac
   function handleNaarBudgetten(e) {
     e.preventDefault();
     onNaarBudgetten?.();
+  }
+
+  function nav(fn) {
+    return (e) => {
+      e.preventDefault();
+      fn?.();
+    };
   }
 
   return (
@@ -189,9 +202,9 @@ export default function Start({ onNaarBudgetten, onNaarTransactie, onNaarTransac
  
       <nav className="onderbalk">
         <a href="#start" className="actief">Start</a>
-        <button type="button" onClick={onNaarTransacties}>Transacties</button>
+        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
         <a href="#budgetten" onClick={handleNaarBudgetten}>Budgetten</a>
-        <a href="#sparen">Sparen</a>
+        <a href="#sparen" onClick={nav(onNaarSparen)}>Sparen</a>
         <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
       </nav>
     </div>

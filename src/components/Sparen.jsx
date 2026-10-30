@@ -201,7 +201,12 @@ function Toevoegen({ onKlaar }) {
 }
 
 /* ---------- hoofdscherm ---------- */
-export default function Sparen({ onNaarStart, onNaarUitloggen }) {
+export default function Sparen({
+  onNaarStart,
+  onNaarTransacties,
+  onNaarBudgetten,
+  onNaarUitloggen,
+}) {
   const [scherm, setScherm] = useState({ naam: 'lijst' })
   const [doelen, setDoelen] = useState(getDoelen)
 
@@ -248,7 +253,8 @@ export default function Sparen({ onNaarStart, onNaarUitloggen }) {
 
       <nav className="onderbalk">
         <a href="#start" onClick={nav(onNaarStart)}>Start</a>
-        <a href="#transacties" onClick={(e) => e.preventDefault()}>Transacties</a>
+        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
+        <a href="#budgetten" onClick={nav(onNaarBudgetten)}>Budgetten</a>
         <a href="#sparen" className="actief" onClick={(e) => e.preventDefault()}>Sparen</a>
         <a href="#uitloggen" onClick={nav(onNaarUitloggen)}>Uitloggen</a>
       </nav>

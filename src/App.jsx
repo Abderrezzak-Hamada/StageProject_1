@@ -15,6 +15,10 @@ export default function App() {
   const [pagina, setPagina] = useState(() =>
     getHuidigeGebruiker() ? "start" : "login"
   );
+  const [transacties, setTransacties] = useState(voorbeeldTransacties);
+  const [transactiesFilter, setTransactiesFilter] = useState("alles");
+  const [sorteringen, setSorteringen] = useState({});
+  const [sorteerFilter, setSorteerFilter] = useState("alles");
  
   function handleLogin() {
     setPagina("start");
@@ -52,9 +56,21 @@ export default function App() {
         onNaarTransactie={() => setPagina("transactie")}
         onNaarSorteren={() => setPagina("sorteren")}
         onNaarTransacties={() => setPagina("transacties")}
+        onNaarSparen={() => setPagina("sparen")}
         onNaarUitloggen={() => setPagina("uitloggen")}
         />
     )
+  }
+
+  if (pagina === "budgetten") {
+    return (
+      <Budgetten
+        onNaarStart={() => setPagina("start")}
+        onNaarTransacties={() => setPagina("transacties")}
+        onNaarSparen={() => setPagina("sparen")}
+        onNaarUitloggen={() => setPagina("uitloggen")}
+      />
+    );
   }
 
   if (pagina === "sorteren") {
@@ -80,6 +96,8 @@ export default function App() {
         initialFilter={transactiesFilter}
         onFilterChange={setTransactiesFilter}
         onNaarStart={() => setPagina("start")}
+        onNaarBudgetten={() => setPagina("budgetten")}
+        onNaarSparen={() => setPagina("sparen")}
         onNaarTransactie={() => setPagina("transactie")}
         onNaarSorteren={(filter) => {
           setSorteerFilter(filter);
@@ -117,6 +135,8 @@ export default function App() {
     return (
       <Sparen
         onNaarStart={() => setPagina("start")}
+        onNaarTransacties={() => setPagina("transacties")}
+        onNaarBudgetten={() => setPagina("budgetten")}
         onNaarUitloggen={() => setPagina("uitloggen")}
       />
     );
