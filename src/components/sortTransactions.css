@@ -1,0 +1,111 @@
+.sorteren-pagina {
+  --tekst: #071b36;
+  --zacht: #536981;
+  --rand: #c9cdd2;
+  --primair: #3d5170;
+  min-height: 100vh;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f7f7f6;
+  color: var(--tekst);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.sorteren-pagina * { box-sizing: border-box; }
+
+.sorteren-kop {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 30px;
+  background: #fff;
+  border-bottom: 1px solid var(--rand);
+}
+
+.sorteren-kop h1 {
+  margin: 0;
+  color: var(--tekst);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.sorteren-terug {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--tekst);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--tekst);
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sorteren-inhoud { padding: 28px 30px 155px; }
+.sorteren-uitleg { margin: 0 0 23px; color: var(--zacht); font-size: 18px; }
+
+.sorteren-opties {
+  margin: 0;
+  padding: 0 23px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.sorteren-optie {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-height: 73px;
+  border-bottom: 1px solid #dfe1e3;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sorteren-optie:last-child { border-bottom: 0; }
+.sorteren-optie input {
+  appearance: none;
+  flex: none;
+  width: 29px;
+  height: 29px;
+  margin: 0;
+  border: 2px solid #8a9098;
+  border-radius: 50%;
+  background: #fff;
+}
+.sorteren-optie input:checked { border: 8px solid var(--primair); }
+
+.sorteren-voorbeeld {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 17px 4px 21px;
+  padding: 18px;
+  border-left: 3px solid #536b8e;
+  background: #f0f3f7;
+  color: var(--zacht);
+}
+.sorteren-voorbeeld strong { color: var(--tekst); font-size: 20px; }
+.sorteren-voorbeeld small { font-size: 15px; }
+
+.sorteren-toepassen,
+.sorteren-annuleren {
+  width: 100%;
+  height: 65px;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sorteren-toepassen { border: 1px solid var(--primair); background: var(--primair); color: #fff; }
+.sorteren-annuleren { margin-top: 20px; border: 1px solid var(--tekst); background: #fff; color: var(--tekst); }
+.sorteren-pagina :focus-visible { outline: 3px solid #315c9b; outline-offset: 2px; }
+.visueel-verborgen { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+@media (max-width: 540px) {
+  .sorteren-kop, .sorteren-inhoud { padding-left: 20px; padding-right: 20px; }
+  .sorteren-kop h1 { font-size: 22px; }
+}

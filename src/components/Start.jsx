@@ -86,7 +86,7 @@ function balkKleur(besteed, max) {
   return "blauw";
 }
  
-export default function Start({ onNaarUitloggen }) {
+export default function Start({ onNaarTransactie, onNaarTransacties, onNaarUitloggen }) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
  
@@ -162,7 +162,7 @@ export default function Start({ onNaarUitloggen }) {
         <section className="kaart">
           <div className="kaart-kop">
             <h2>Laatste 5 transacties</h2>
-            <a href="#transacties">Alle</a>
+            <button type="button" className="kaart-link" onClick={onNaarTransacties}>Alle</button>
           </div>
           {data.transacties.length === 0 && <p className="leeg">Nog geen transacties deze maand.</p>}
           <ul className="transacties">
@@ -178,13 +178,15 @@ export default function Start({ onNaarUitloggen }) {
         </section>
  
         <div className="knop-rij">
-          <button className="knop-primair">+ Transactie</button>
+          <button className="knop-primair" onClick={onNaarTransactie}>
+            + Transactie
+          </button>
         </div>
       </main>
  
       <nav className="onderbalk">
         <a href="#start" className="actief">Start</a>
-        <a href="#transacties">Transacties</a>
+        <button type="button" onClick={onNaarTransacties}>Transacties</button>
         <a href="#budgetten">Budgetten</a>
         <a href="#sparen">Sparen</a>
         <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
