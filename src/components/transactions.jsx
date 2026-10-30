@@ -48,6 +48,7 @@ export default function Transacties({
   transacties = voorbeeldTransacties,
   onNaarStart,
   onNaarBudgetten,
+  onNaarSparen,
   onNaarTransactie,
   onNaarUitloggen,
   onNaarSparen,

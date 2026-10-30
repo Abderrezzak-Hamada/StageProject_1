@@ -133,6 +133,13 @@ export default function Budgetten({
     onNaarUitloggen?.();
   }
 
+  function nav(fn) {
+    return (e) => {
+      e.preventDefault();
+      fn?.();
+    };
+  }
+
   return (
     <div className="budgetten">
       <header className="budgetten-kop">
@@ -225,10 +232,10 @@ export default function Budgetten({
       </main>
 
       <nav className="onderbalk">
-        <a href="#start" onClick={(e) => { e.preventDefault(); onNaarStart?.(); }}>Start</a>
-        <a href="#transacties" onClick={(e) => { e.preventDefault(); onNaarTransacties?.(); }}>Transacties</a>
+        <a href="#start" onClick={nav(onNaarStart)}>Start</a>
+        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
         <a href="#budgetten" className="actief">Budgetten</a>
-        <a href="#sparen" onClick={(e) => { e.preventDefault(); onNaarSparen?.(); }}>Sparen</a>
+        <a href="#sparen" onClick={nav(onNaarSparen)}>Sparen</a>
         <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
       </nav>
     </div>
