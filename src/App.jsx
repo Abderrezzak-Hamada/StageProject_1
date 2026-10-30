@@ -5,31 +5,32 @@ import SignUp from "./components/signup.jsx";
 import Start from "./components/Start.jsx";
 import Uitloggen from "./components/Uitloggen.jsx";
 
+ 
 export default function App() {
   const [pagina, setPagina] = useState(() =>
     getHuidigeGebruiker() ? "start" : "login"
   );
-
+ 
   function handleLogin() {
     setPagina("start");
   }
-
+ 
   function handleRegister({ email, password }) {
     const registratie = registreer(email, password);
     if (!registratie.ok) return registratie;
-
+ 
     const loginResultaat = login(email, password);
     if (!loginResultaat.ok) return loginResultaat;
-
+ 
     handleLogin();
     return { ok: true };
   }
-
+ 
   function handleUitloggen() {
     logout();
     setPagina("login");
   }
-
+ 
   if (pagina === "signup") {
     return (
       <SignUp
@@ -38,11 +39,20 @@ export default function App() {
       />
     );
   }
-
+ 
   if (pagina === "start") {
-    return <Start onNaarUitloggen={() => setPagina("uitloggen")} />;
+    return (
+      <Start
+        onNaarUitloggen={() => setPagina("uitloggen")}
+        onNaarBudgetten={() => setPagina("budgetten")}
+      />
+    );
   }
-
+ 
+  if (pagina === "budgetten") {
+    return <BudgetApp onTerug={() => setPagina("start")} />;
+  }
+ 
   if (pagina === "uitloggen") {
     return (
       <Uitloggen
@@ -51,7 +61,7 @@ export default function App() {
       />
     );
   }
-
+ 
   return (
     <Login
       onLogin={handleLogin}
@@ -59,3 +69,4 @@ export default function App() {
     />
   );
 }
+ 
