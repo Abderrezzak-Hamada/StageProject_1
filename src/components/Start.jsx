@@ -86,7 +86,7 @@ function balkKleur(besteed, max) {
   return "blauw";
 }
  
-export default function Start({ onNaarUitloggen, onNaarSparen }) {
+export default function Start({ onNaarBudgetten, onNaarTransactie, onNaarTransacties, onNaarUitloggen }) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
  
@@ -108,13 +108,12 @@ export default function Start({ onNaarUitloggen, onNaarSparen }) {
     e.preventDefault();
     onNaarUitloggen?.();
   }
- 
-  function handleSparen(e) {
+
+  function handleNaarBudgetten(e) {
     e.preventDefault();
-    onNaarSparen?.();
+    onNaarBudgetten?.();
   }
- 
- 
+
   return (
     <div className="start">
       <header className="start-kop">
@@ -146,7 +145,7 @@ export default function Start({ onNaarUitloggen, onNaarSparen }) {
         <section className="kaart">
           <div className="kaart-kop">
             <h2>Budgetten</h2>
-            <a href="#budgetten">Alles</a>
+            <a href="#budgetten" onClick={handleNaarBudgetten}>Alles</a>
           </div>
           {data.budgetten.length === 0 && <p className="leeg">Nog geen budgetten deze maand.</p>}
           {data.budgetten.map((b) => (
@@ -190,9 +189,9 @@ export default function Start({ onNaarUitloggen, onNaarSparen }) {
  
       <nav className="onderbalk">
         <a href="#start" className="actief">Start</a>
-        <a href="#transacties">Transacties</a>
-        <a href="#budgetten">Budgetten</a>
-        <a href="#sparen" onClick={handleSparen}>Sparen</a>
+        <button type="button" onClick={onNaarTransacties}>Transacties</button>
+        <a href="#budgetten" onClick={handleNaarBudgetten}>Budgetten</a>
+        <a href="#sparen">Sparen</a>
         <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
       </nav>
     </div>
