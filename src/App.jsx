@@ -15,6 +15,7 @@ export default function App() {
   const [sorteringen, setSorteringen] = useState({});
   const [sorteerFilter, setSorteerFilter] = useState("alles");
   const [transactiesFilter, setTransactiesFilter] = useState("alles");
+  const [teBewerkenTransactie, setTeBewerkenTransactie] = useState(null);
 
   function handleLogin() {
     setPagina("start");
@@ -58,6 +59,15 @@ export default function App() {
         transacties={transacties}
         initialFilter={transactiesFilter}
         onFilterChange={setTransactiesFilter}
+        onBewerken={(transactie) => {
+          setTeBewerkenTransactie(transactie);
+          setPagina("transactie");
+        }}
+        onVerwijderen={(transactie) => {
+          if (window.confirm(`Wil je "${transactie.omschrijving}" verwijderen?`)) {
+            setTransacties((huidige) => huidige.filter(({ id }) => id !== transactie.id));
+          }
+        }}
         onNaarStart={() => setPagina("start")}
         onNaarTransactie={() => setPagina("transactie")}
         onNaarSorteren={(filter) => {
@@ -71,22 +81,44 @@ export default function App() {
   }
 
   if (pagina === "transactie") {
+    const teBewerken = teBewerkenTransactie;
     return (
       <AddTransaction
+        bewerkmodus={Boolean(teBewerken)}
+        beginwaarden={teBewerken ? {
+          type: teBewerken.bedrag >= 0 ? "inkomst" : "uitgave",
+          bedrag: String(Math.abs(teBewerken.bedrag)).replace(".", ","),
+          categorie: teBewerken.categorie,
+          datum: teBewerken.datum,
+          omschrijving: teBewerken.omschrijving,
+          vasteLast: teBewerken.vasteLast ?? false,
+        } : {}}
         onOpslaan={async (transactie) => {
           setTransacties((huidige) => [
-            ...huidige,
-            {
+            ...(!teBewerken ? [{
               id: Date.now(),
               datum: transactie.datum,
               omschrijving: transactie.omschrijving || transactie.categorie,
               categorie: transactie.categorie,
               bedrag: (transactie.type === "inkomst" ? 1 : -1) * transactie.bedragInCenten / 100,
-            },
+              vasteLast: transactie.vasteLast,
+            }] : []),
+            ...(teBewerken ? huidige.map((bestaande) => bestaande.id === teBewerken.id ? {
+              ...bestaande,
+              datum: transactie.datum,
+              omschrijving: transactie.omschrijving || transactie.categorie,
+              categorie: transactie.categorie,
+              bedrag: (transactie.type === "inkomst" ? 1 : -1) * transactie.bedragInCenten / 100,
+              vasteLast: transactie.vasteLast,
+            } : bestaande) : huidige),
           ]);
+          setTeBewerkenTransactie(null);
           setPagina("transacties");
         }}
-        onAnnuleren={() => setPagina("transacties")}
+        onAnnuleren={() => {
+          setTeBewerkenTransactie(null);
+          setPagina("transacties");
+        }}
       />
     );
   }

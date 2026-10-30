@@ -50,6 +50,8 @@ export default function Transacties({
   onNaarTransactie,
   onNaarUitloggen,
   onNaarSorteren,
+  onBewerken,
+  onVerwijderen,
   sorteringen = {},
   initialFilter = "alles",
   onFilterChange,
@@ -219,9 +221,27 @@ export default function Transacties({
                   <span className="transactie-datum">{datumLabel(transactie.datum)}</span>
                   <div className="transactie-details">
                     <span>{transactie.omschrijving}{transactie.detail && ` · ${transactie.detail}`}</span>
-                    <strong className={transactie.bedrag >= 0 ? "bedrag positief" : "bedrag"}>
-                      {transactie.bedrag >= 0 ? "+" : "-"} {euro(transactie.bedrag)}
-                    </strong>
+                    <div className="transactie-bedrag-acties">
+                      <strong className={transactie.bedrag >= 0 ? "bedrag positief" : "bedrag"}>
+                        {transactie.bedrag >= 0 ? "+" : "-"} {euro(transactie.bedrag)}
+                      </strong>
+                      <button
+                        type="button"
+                        className="transactie-bewerken"
+                        onClick={() => onBewerken?.(transactie)}
+                        aria-label={`${transactie.omschrijving} aanpassen`}
+                      >
+                        Aanpassen
+                      </button>
+                      <button
+                        type="button"
+                        className="transactie-verwijderen"
+                        onClick={() => onVerwijderen?.(transactie)}
+                        aria-label={`${transactie.omschrijving} verwijderen`}
+                      >
+                        Verwijderen
+                      </button>
+                    </div>
                   </div>
                 </article>
               ))}

@@ -149,6 +149,10 @@
 .transactie-datum { display: block; margin-bottom: 17px; color: #536981; font-size: 15px; text-transform: uppercase; }
 .transactie-details { display: flex; justify-content: space-between; gap: 15px; padding-bottom: 13px; border-bottom: 1px solid #dfe1e3; font-size: 18px; }
 .transactie-regel:last-child .transactie-details { border-bottom: 0; padding-bottom: 0; }
+.transactie-bedrag-acties { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px; }
+.transactie-bedrag-acties button { padding: 0; border: 0; background: transparent; font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
+.transactie-bewerken { color: #244b78; }
+.transactie-verwijderen { color: #a51d2d; }
 .bedrag { white-space: nowrap; font-size: 19px; }
 .bedrag.positief { color: var(--tekst); }
 .transacties-leeg { margin: 0; padding: 25px 20px; color: var(--zacht); }
@@ -167,4 +171,6 @@
   .filterknop { padding: 0 12px; font-size: 15px; }
   .transacties-onderbalk { padding-left: 14px; padding-right: 14px; }
   .transacties-onderbalk button { font-size: 14px; }
+  .transactie-details { align-items: flex-start; }
+  .transactie-bedrag-acties { flex-direction: column; align-items: flex-end; gap: 6px; }
 }

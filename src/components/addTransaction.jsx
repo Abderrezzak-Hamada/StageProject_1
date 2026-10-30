@@ -33,6 +33,7 @@ export default function TransactieToevoegen({
   categorieen = ["Boodschappen", "Wonen", "Vervoer", "Uitgaan", "Abonnementen"],
   inkomenscategorieen = ["Salaris", "Studiefinanciering", "Toeslagen", "Freelance", "Overig"],
   beginwaarden = {},
+  bewerkmodus = false,
   toonFoutenMeteen = false,
   onOpslaan,
   onAnnuleren,
@@ -82,7 +83,7 @@ export default function TransactieToevoegen({
           <button type="button" className="tv-terug" aria-label="Terug" onClick={onAnnuleren}>
             &lt;
           </button>
-          <h1>Transactie toevoegen</h1>
+          <h1>{bewerkmodus ? "Transactie aanpassen" : "Transactie toevoegen"}</h1>
         </header>
 
         <form className="tv-formulier" onSubmit={handleSubmit} noValidate>
@@ -177,7 +178,7 @@ export default function TransactieToevoegen({
           )}
 
           <button type="submit" className="tv-knop tv-knop--primair" disabled={bezig}>
-            {bezig ? "Bezig met opslaan…" : "Opslaan"}
+            {bezig ? "Bezig met opslaan…" : bewerkmodus ? "Aanpassingen opslaan" : "Opslaan"}
           </button>
           <button type="button" className="tv-knop tv-knop--rand" onClick={onAnnuleren} disabled={bezig}>
             Annuleren
