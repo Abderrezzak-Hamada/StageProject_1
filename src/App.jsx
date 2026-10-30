@@ -6,6 +6,7 @@ import Start from "./components/Start.jsx";
 import AddTransaction from "./components/addTransaction.jsx";
 import Transactions, { voorbeeldTransacties } from "./components/transactions.jsx";
 import SortTransactions from "./components/SortTransactions.jsx";
+import Budgetten from "./components/Budgetten.jsx";
 import Uitloggen from "./components/Uitloggen.jsx";
 
  
@@ -51,16 +52,11 @@ export default function App() {
   if (pagina === "start") {
     return (
       <Start
-
-        onNaarUitloggen={() => setPagina("uitloggen")}
         onNaarBudgetten={() => setPagina("budgetten")}
-
         onNaarTransactie={() => setPagina("transactie")}
         onNaarSorteren={() => setPagina("sorteren")}
         onNaarTransacties={() => setPagina("transacties")}
         onNaarUitloggen={() => setPagina("uitloggen")}
-      />
-    );
   }
 
   if (pagina === "sorteren") {
