@@ -13,15 +13,12 @@ export default function App() {
   const [pagina, setPagina] = useState(() =>
     getHuidigeGebruiker() ? "start" : "login"
   );
-<<<<<<< HEAD
- 
-=======
+
   const [transacties, setTransacties] = useState(voorbeeldTransacties);
   const [sorteringen, setSorteringen] = useState({});
   const [sorteerFilter, setSorteerFilter] = useState("alles");
   const [transactiesFilter, setTransactiesFilter] = useState("alles");
 
->>>>>>> 5d0f89e93a5ff028eb006ea09ece7ac6df415bf2
   function handleLogin() {
     setPagina("start");
   }
@@ -54,10 +51,10 @@ export default function App() {
   if (pagina === "start") {
     return (
       <Start
-<<<<<<< HEAD
+
         onNaarUitloggen={() => setPagina("uitloggen")}
         onNaarBudgetten={() => setPagina("budgetten")}
-=======
+
         onNaarTransactie={() => setPagina("transactie")}
         onNaarSorteren={() => setPagina("sorteren")}
         onNaarTransacties={() => setPagina("transacties")}
@@ -117,7 +114,7 @@ export default function App() {
           setPagina("transacties");
         }}
         onAnnuleren={() => setPagina("transacties")}
->>>>>>> 5d0f89e93a5ff028eb006ea09ece7ac6df415bf2
+
       />
     );
   }
