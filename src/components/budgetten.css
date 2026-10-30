@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+.budgetten {
+  --tekst: #1c2233;
+  --zacht: #5b616e;
+  --rand: #8c909a;
+  --lichtrand: #cfd1d6;
+  --primair: #3d4f6e;
+  --blauw: #56637f;
+  --oranje: #b85c1f;
+  --rood: #b92b2b;
+  --spoor: #e3e5e9;
+
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--tekst);
+  background: #f6f5f3;
+  min-height: 100vh;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.budgetten * { box-sizing: border-box; }
+
+/* Kop met maandkeuze */
+.budgetten-kop {
+  background: #fff;
+  border-bottom: 1px solid var(--lichtrand);
+  border-radius: 6px 6px 0 0;
+  padding: 28px 28px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.budgetten-kop h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.budgetten .maand-knop {
+  width: 56px;
+  height: 56px;
+  background: #fff;
+  color: var(--tekst);
+  border: 1px solid var(--tekst);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+.budgetten .maand-knop:hover { background: #f0f1f3; }
+
+/* Inhoud */
+.budgetten-inhoud {
+  flex: 1;
+  padding: 22px 28px 40px;
+}
+
+.budgetten-melding {
+  margin: 0 0 20px;
+  padding: 18px 20px;
+  background: #fffaf4;
+  border: 1px dashed var(--oranje);
+  border-radius: 6px;
+  color: #7a3d0f;
+  font-size: 17px;
+}
+
+.budgetten .kaart {
+  background: #fff;
+  border: 1px solid var(--lichtrand);
+  border-radius: 6px;
+  padding: 28px 24px 36px;
+}
+
+.budgetten .leeg {
+  margin: 0;
+  color: var(--zacht);
+  font-size: 17px;
+}
+
+.budgetten .budget + .budget { margin-top: 26px; }
+
+.budgetten .budget-rij {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 17px;
+  margin-bottom: 12px;
+}
+.budgetten .budget-rij span:last-child { text-align: right; }
+
+.budgetten .balk {
+  height: 16px;
+  background: var(--spoor);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.budgetten .balk-vulling {
+  height: 100%;
+  border-radius: 999px;
+}
+.budgetten .balk-vulling.blauw { background: var(--blauw); }
+.budgetten .balk-vulling.oranje { background: var(--oranje); }
+.budgetten .balk-vulling.rood { background: var(--rood); }
+
+/* Knoppen */
+.budgetten .knop-rij {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.budgetten .knop-primair {
+  height: 66px;
+  background: var(--primair);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.budgetten .knop-primair:hover { background: #33435e; }
+
+.budgetten .knop-secundair {
+  min-height: 66px;
+  background: #fff;
+  color: var(--tekst);
+  border: 1px solid var(--tekst);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.budgetten .knop-secundair:hover:not(:disabled) { background: #f0f1f3; }
+.budgetten .knop-secundair:disabled {
+  color: var(--zacht);
+  border-color: var(--rand);
+  cursor: not-allowed;
+}
+
+/* Onderbalk */
+.budgetten .onderbalk {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  border-top: 1px solid var(--lichtrand);
+  border-radius: 0 0 6px 6px;
+  padding: 26px 28px 34px;
+  display: flex;
+  justify-content: space-between;
+}
+.budgetten .onderbalk a {
+  color: var(--tekst);
+  font-size: 17px;
+  text-decoration: none;
+}
+.budgetten .onderbalk a.actief {
+  font-weight: 700;
+  color: var(--primair);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.budgetten :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
+
+@media (max-width: 420px) {
+  .budgetten-kop { padding: 18px 14px 16px; }
+  .budgetten-kop h1 { font-size: 22px; }
+  .budgetten .maand-knop { width: 44px; height: 44px; }
+  .budgetten-inhoud { padding: 16px 14px 28px; }
+  .budgetten .kaart { padding: 20px 16px 26px; }
+  .budgetten .budget-rij { font-size: 15px; }
+  .budgetten .onderbalk { padding: 18px 14px 24px; }
+  .budgetten .onderbalk a { font-size: 14px; }
+}
+
+/* Formulier en berichten */
+.budgetten .budgetten-formulier {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.budgetten .budgetten-formulier label {
+  font-size: 17px;
+  color: var(--zacht);
+  margin-bottom: 10px;
+}
+.budgetten .budgetten-formulier input {
+  width: 100%;
+  height: 64px;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 19px;
+  color: var(--tekst);
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+.budgetten .budgetten-formulier input::placeholder { color: var(--zacht); opacity: 1; }
+.budgetten .budgetten-formulier input[aria-invalid="true"] {
+  border-color: #c9141f;
+  margin-bottom: 6px;
+}
+.budgetten .budgetten-formulier .knop-rij { margin-top: 4px; }
+
+.budgetten-fout {
+  margin: 0 0 20px;
+  color: #c9141f;
+  font-size: 15px;
+}
+
+.budgetten-bericht {
+  margin: 20px 0 0;
+  font-size: 17px;
+  color: var(--zacht);
+}

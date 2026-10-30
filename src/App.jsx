@@ -3,6 +3,7 @@ import { getHuidigeGebruiker, login, logout, registreer } from "./auth.js";
 import Login from "./components/Login.jsx";
 import SignUp from "./components/signup.jsx";
 import Start from "./components/Start.jsx";
+import Budgetten from "./components/Budgetten.jsx";
 import Uitloggen from "./components/Uitloggen.jsx";
 
 export default function App() {
@@ -40,7 +41,16 @@ export default function App() {
   }
 
   if (pagina === "start") {
-    return <Start onNaarUitloggen={() => setPagina("uitloggen")} />;
+    return (
+      <Start
+        onNaarBudgetten={() => setPagina("budgetten")}
+        onNaarUitloggen={() => setPagina("uitloggen")}
+      />
+    );
+  }
+
+  if (pagina === "budgetten") {
+    return <Budgetten onNaarStart={() => setPagina("start")} />;
   }
 
   if (pagina === "uitloggen") {
