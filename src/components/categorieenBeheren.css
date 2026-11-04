@@ -1,0 +1,174 @@
+.cb-pagina {
+  --tekst: #1c2233;
+  --zacht: #5b616e;
+  --rand: #8c909a;
+  --primair: #3d4f6e;
+  --fout: #c9141f;
+
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--tekst);
+  color-scheme: light;
+  background: #fefeff;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 0 24px;
+}
+.cb-pagina * { box-sizing: border-box; }
+
+.cb-kop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 8px;
+}
+.cb-kop h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: normal;
+  color: var(--tekst);
+}
+.cb-terug {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 18px;
+  color: var(--primair);
+  cursor: pointer;
+}
+
+.cb-inhoud { padding: 8px 16px; }
+
+.cb-type {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.cb-type button {
+  min-height: 46px;
+  background: #fff;
+  color: var(--primair);
+  border: 1px solid var(--primair);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cb-type button.actief {
+  background: var(--primair);
+  color: #fff;
+}
+
+.cb-toevoegen {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.cb-toevoegen input,
+.cb-bewerk input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--tekst);
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+}
+.cb-toevoegen button {
+  flex: none;
+  min-height: 48px;
+  padding: 0 16px;
+  background: var(--primair);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cb-fout {
+  margin: 0 0 8px;
+  color: var(--fout);
+  font-size: 15px;
+}
+
+.cb-lijst {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  background: #fff;
+  border: 1px solid #cfd1d6;
+  border-radius: 6px;
+}
+.cb-regel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e6e7ea;
+}
+.cb-regel:last-child { border-bottom: 0; }
+.cb-naam {
+  flex: 1;
+  min-width: 0;
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.cb-leeg {
+  padding: 16px;
+  color: var(--zacht);
+}
+
+.cb-bewerk {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+.cb-bewerk input { flex: 1 1 100%; }
+
+.cb-knop {
+  min-height: 40px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--primair);
+  border: 1px solid var(--primair);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cb-knop--primair {
+  background: var(--primair);
+  color: #fff;
+}
+.cb-knop--gevaar {
+  color: var(--fout);
+  border-color: var(--fout);
+}
+
+.cb-hint {
+  margin: 14px 2px 0;
+  font-size: 14px;
+  color: var(--zacht);
+}
+
+.cb-pagina :focus-visible {
+  outline: 3px solid var(--primair);
+  outline-offset: 2px;
+}

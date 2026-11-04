@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "./transactions.css";
-
+ 
 const MAANDEN = [
   "Januari",
   "Februari",
@@ -15,24 +15,24 @@ const MAANDEN = [
   "November",
   "December",
 ];
-
+ 
 const euro = (bedrag) =>
   new Intl.NumberFormat("nl-NL", {
     style: "currency",
     currency: "EUR",
     minimumFractionDigits: 2,
   }).format(Math.abs(bedrag));
-
+ 
 const datumLabel = (datum) =>
   new Intl.DateTimeFormat("nl-NL", {
     day: "numeric",
     month: "long",
   }).format(new Date(`${datum}T00:00:00`));
-
+ 
 function maandKey(jaar, maand) {
   return `${jaar}-${String(maand + 1).padStart(2, "0")}`;
 }
-
+ 
 export const voorbeeldTransacties = [
   { id: 1, datum: "2026-10-05", omschrijving: "Boodschappen", categorie: "Boodschappen", bedrag: -23.4 },
   { id: 2, datum: "2026-10-04", omschrijving: "Uitgaan", detail: "bioscoop", categorie: "Uitgaan", bedrag: -18 },
@@ -43,13 +43,14 @@ export const voorbeeldTransacties = [
   { id: 5, datum: "2026-10-01", omschrijving: "Wonen", detail: "huur", categorie: "Wonen", bedrag: -380 },
   { id: 6, datum: "2026-10-01", omschrijving: "Abonnementen", detail: "telefoon", categorie: "Abonnementen", bedrag: -15 },
 ];
-
+ 
 export default function Transacties({
   transacties = voorbeeldTransacties,
   onNaarStart,
   onNaarBudgetten,
   onNaarSparen,
   onNaarTransactie,
+  onNaarCategorieen,
   onNaarUitloggen,
   onNaarSorteren,
   sorteringen = {},
@@ -73,7 +74,7 @@ export default function Transacties({
         if (filter === "categorie") return transactie.categorie !== "";
         return true;
       });
-
+ 
     return [...maandTransacties].sort((a, b) => {
       const sortering = sorteringen[filter] || "nieuwste";
       if (sortering === "hoogste") return b.bedrag - a.bedrag;
@@ -83,7 +84,7 @@ export default function Transacties({
       return sortering === "oudste" ? verschil : -verschil;
     });
   }, [filter, maand, sorteringen, transacties, zoekterm, jaar]);
-
+ 
   const totaalInkomsten = zichtbareTransacties
     .filter((transactie) => transactie.bedrag > 0)
     .reduce((totaal, transactie) => totaal + transactie.bedrag, 0);
@@ -98,7 +99,7 @@ export default function Transacties({
         categorieen[categorie] = (categorieen[categorie] || 0) + Math.abs(transactie.bedrag);
         return categorieen;
       }, {});
-
+ 
     return Object.entries(perCategorie)
       .map(([categorie, bedrag]) => ({
         categorie,
@@ -107,13 +108,13 @@ export default function Transacties({
       }))
       .sort((a, b) => b.bedrag - a.bedrag);
   }, [totaalUitgaven, zichtbareTransacties]);
-
+ 
   function verschuif(stap) {
     const nieuweDatum = new Date(jaar, maand + stap, 1);
     setJaar(nieuweDatum.getFullYear());
     setMaand(nieuweDatum.getMonth());
   }
-
+ 
   return (
     <div className="transacties-pagina">
       <header className="transacties-kop">
@@ -125,7 +126,7 @@ export default function Transacties({
           &gt;
         </button>
       </header>
-
+ 
       <main className="transacties-inhoud">
         <label className="zoek-label" htmlFor="transactie-zoekveld">Zoeken</label>
         <input
@@ -136,7 +137,7 @@ export default function Transacties({
           value={zoekterm}
           onChange={(e) => setZoekterm(e.target.value)}
         />
-
+ 
         <div className="transactie-filters" aria-label="Transactiefilters">
           {[
             ["alles", "Alles"],
@@ -158,7 +159,7 @@ export default function Transacties({
             </button>
           ))}
         </div>
-
+ 
         {filter === "inkomsten" && (
           <section className="inkomsten-totaal">
             <span>Totaal inkomsten in {MAANDEN[maand].toLowerCase()}</span>
@@ -171,7 +172,7 @@ export default function Transacties({
             <strong>{euro(totaalUitgaven)}</strong>
           </section>
         )}
-
+ 
         {filter === "categorie" ? (
           <>
             <section className="categorie-totaal">
@@ -199,7 +200,11 @@ export default function Transacties({
                 </article>
               ))}
             </section>
-            <button type="button" className="categorie-beheren">
+            <button
+              type="button"
+              className="categorie-beheren"
+              onClick={() => onNaarCategorieen?.()}
+            >
               Categorieën beheren
             </button>
           </>
@@ -211,7 +216,7 @@ export default function Transacties({
                 Sorteren
               </button>
             </div>
-
+ 
             <section className="transacties-lijst" aria-live="polite">
               {zichtbareTransacties.length === 0 && (
                 <p className="transacties-leeg">Geen transacties gevonden.</p>
@@ -228,7 +233,7 @@ export default function Transacties({
                 </article>
               ))}
             </section>
-
+ 
             <p className="transacties-hint">Tik op een regel om te wijzigen of te verwijderen.</p>
           </>
         )}
@@ -238,7 +243,7 @@ export default function Transacties({
           </button>
         </div>
       </main>
-
+ 
       <nav className="transacties-onderbalk" aria-label="Hoofdnavigatie">
         <button type="button" onClick={onNaarStart}>Start</button>
         <button type="button" className="actief">Transacties</button>

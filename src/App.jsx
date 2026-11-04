@@ -1,24 +1,82 @@
 
 import { useState } from "react";
-import { getHuidigeGebruiker, login, logout, registreer } from "./auth.js";
+import { login, logout, registreer } from "./auth.js";
 import Login from "./components/Login.jsx";
 import SignUp from "./components/signup.jsx";
 import Start from "./components/Start.jsx";
 import AddTransaction from "./components/addTransaction.jsx";
 import Transactions, { voorbeeldTransacties } from "./components/transactions.jsx";
 import SortTransactions from "./components/SortTransactions.jsx";
+import CategorieenBeheren from "./components/CategorieenBeheren.jsx";
 import Budgetten from "./components/Budgetten.jsx";
 import Uitloggen from "./components/Uitloggen.jsx";
 import Sparen from "./components/Sparen.jsx";
  
+const CATEGORIEEN_KEY = "categorieen";
+const STANDAARD_CATEGORIEEN = {
+  uitgaven: ["Boodschappen", "Wonen", "Vervoer", "Uitgaan", "Abonnementen"],
+  inkomsten: ["Salaris", "Studiefinanciering", "Toeslagen", "Freelance", "Overig"],
+};
+ 
+function laadCategorieen() {
+  try {
+    const opgeslagen = JSON.parse(localStorage.getItem(CATEGORIEEN_KEY));
+    if (Array.isArray(opgeslagen?.uitgaven) && Array.isArray(opgeslagen?.inkomsten)) {
+      return opgeslagen;
+    }
+  } catch {
+    // ongeldige opslag: gebruik de standaardlijst
+  }
+  return STANDAARD_CATEGORIEEN;
+}
+ 
 export default function App() {
-  const [pagina, setPagina] = useState(() =>
-    getHuidigeGebruiker() ? "start" : "login"
-  );
+  // Altijd starten op de loginpagina
+  const [pagina, setPagina] = useState("login");
   const [transacties, setTransacties] = useState(voorbeeldTransacties);
   const [transactiesFilter, setTransactiesFilter] = useState("alles");
   const [sorteringen, setSorteringen] = useState({});
   const [sorteerFilter, setSorteerFilter] = useState("alles");
+  const [categorieen, setCategorieen] = useState(laadCategorieen);
+ 
+  function slaCategorieenOp(nieuw) {
+    setCategorieen(nieuw);
+    try {
+      localStorage.setItem(CATEGORIEEN_KEY, JSON.stringify(nieuw));
+    } catch {
+      // opslaan mislukt: de wijziging blijft wel zichtbaar tijdens deze sessie
+    }
+  }
+ 
+  function handleCategorieToevoegen(type, naam) {
+    slaCategorieenOp({ ...categorieen, [type]: [...categorieen[type], naam] });
+  }
+ 
+  function handleCategorieHernoem(type, oudeNaam, nieuweNaam) {
+    slaCategorieenOp({
+      ...categorieen,
+      [type]: categorieen[type].map((c) => (c === oudeNaam ? nieuweNaam : c)),
+    });
+    // Pas ook bestaande transacties van dit type aan
+    setTransacties((huidige) =>
+      huidige.map((t) => {
+        const hoortBijType = type === "inkomsten" ? t.bedrag > 0 : t.bedrag < 0;
+        if (!hoortBijType || t.categorie !== oudeNaam) return t;
+        return {
+          ...t,
+          categorie: nieuweNaam,
+          omschrijving: t.omschrijving === oudeNaam ? nieuweNaam : t.omschrijving,
+        };
+      })
+    );
+  }
+ 
+  function handleCategorieVerwijder(type, naam) {
+    slaCategorieenOp({
+      ...categorieen,
+      [type]: categorieen[type].filter((c) => c !== naam),
+    });
+  }
  
   function handleLogin() {
     setPagina("start");
@@ -58,10 +116,10 @@ export default function App() {
         onNaarSorteren={() => setPagina("sorteren")}
         onNaarTransacties={() => setPagina("transacties")}
         onNaarUitloggen={() => setPagina("uitloggen")}
-        />
-    )
+      />
+    );
   }
-
+ 
   if (pagina === "budgetten") {
     return (
       <Budgetten
@@ -72,7 +130,7 @@ export default function App() {
       />
     );
   }
-
+ 
   if (pagina === "sorteren") {
     return (
       <SortTransactions
@@ -88,7 +146,19 @@ export default function App() {
       />
     );
   }
-
+ 
+  if (pagina === "categorieen") {
+    return (
+      <CategorieenBeheren
+        categorieen={categorieen}
+        onToevoegen={handleCategorieToevoegen}
+        onHernoem={handleCategorieHernoem}
+        onVerwijder={handleCategorieVerwijder}
+        onTerug={() => setPagina("transacties")}
+      />
+    );
+  }
+ 
   if (pagina === "transacties") {
     return (
       <Transactions
@@ -99,6 +169,7 @@ export default function App() {
         onNaarBudgetten={() => setPagina("budgetten")}
         onNaarSparen={() => setPagina("sparen")}
         onNaarTransactie={() => setPagina("transactie")}
+        onNaarCategorieen={() => setPagina("categorieen")}
         onNaarSorteren={(filter) => {
           setSorteerFilter(filter);
           setPagina("sorteren");
@@ -108,10 +179,12 @@ export default function App() {
       />
     );
   }
-
+ 
   if (pagina === "transactie") {
     return (
       <AddTransaction
+        categorieen={categorieen.uitgaven}
+        inkomenscategorieen={categorieen.inkomsten}
         onOpslaan={async (transactie) => {
           setTransacties((huidige) => [
             ...huidige,
@@ -120,13 +193,15 @@ export default function App() {
               datum: transactie.datum,
               omschrijving: transactie.omschrijving || transactie.categorie,
               categorie: transactie.categorie,
-              bedrag: (transactie.type === "inkomst" ? 1 : -1) * transactie.bedragInCenten / 100,
+              bedrag:
+                ((transactie.type === "inkomst" ? 1 : -1) *
+                  transactie.bedragInCenten) /
+                100,
             },
           ]);
           setPagina("transacties");
         }}
         onAnnuleren={() => setPagina("transacties")}
-
       />
     );
   }
