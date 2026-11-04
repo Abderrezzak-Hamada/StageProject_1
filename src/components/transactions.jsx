@@ -51,7 +51,6 @@ export default function Transacties({
   onNaarSparen,
   onNaarTransactie,
   onNaarUitloggen,
-  onNaarSparen,
   onNaarSorteren,
   sorteringen = {},
   initialFilter = "alles",

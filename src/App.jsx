@@ -57,7 +57,6 @@ export default function App() {
         onNaarSparen={() => setPagina("sparen")}
         onNaarSorteren={() => setPagina("sorteren")}
         onNaarTransacties={() => setPagina("transacties")}
-        onNaarSparen={() => setPagina("sparen")}
         onNaarUitloggen={() => setPagina("uitloggen")}
         />
     )
