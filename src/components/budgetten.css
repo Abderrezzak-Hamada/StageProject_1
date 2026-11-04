@@ -22,7 +22,6 @@
 }
 .budgetten * { box-sizing: border-box; }
 
-/* Kop met maandkeuze */
 .budgetten-kop {
   background: #fff;
   border-bottom: 1px solid var(--lichtrand);
@@ -51,7 +50,6 @@
 }
 .budgetten .maand-knop:hover { background: #f0f1f3; }
 
-/* Inhoud */
 .budgetten-inhoud {
   flex: 1;
   padding: 22px 28px 40px;
@@ -84,12 +82,13 @@
 
 .budgetten .budget-rij {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 12px;
   font-size: 17px;
   margin-bottom: 12px;
 }
-.budgetten .budget-rij span:last-child { text-align: right; }
+.budgetten .budget-rij .budget-naam { flex: 1; min-width: 0; }
+.budgetten .budget-rij .budget-bedragen { text-align: right; }
 
 .budgetten .balk {
   height: 16px;
@@ -105,7 +104,122 @@
 .budgetten .balk-vulling.oranje { background: var(--oranje); }
 .budgetten .balk-vulling.rood { background: var(--rood); }
 
-/* Knoppen */
+.budgetten .budget-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.budgetten .menu-knop {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--tekst);
+  border: 1px solid var(--lichtrand);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.budgetten .menu-knop:hover,
+.budgetten .menu-knop[aria-expanded="true"] { background: #f0f1f3; }
+
+.budgetten .menu-lijst {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 5;
+  min-width: 210px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(28, 34, 51, 0.14);
+}
+
+.budgetten .menu-item {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--tekst);
+  cursor: pointer;
+}
+.budgetten .menu-item:hover { background: #f0f1f3; }
+.budgetten .menu-item.gevaar { color: var(--rood); }
+
+.budgetten .budget-acties {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 20px;
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--zacht);
+}
+
+.budgetten .knop-link {
+  min-height: 44px;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primair);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.budgetten .knop-link:hover { color: var(--tekst); }
+.budgetten .knop-link.gevaar { color: var(--rood); }
+.budgetten .knop-link.gevaar:hover { color: #8f1f1f; }
+
+.budgetten .toevoeg-formulier {
+  margin-top: 12px;
+  padding: 16px;
+  background: #f6f5f3;
+  border: 1px solid var(--lichtrand);
+  border-radius: 6px;
+}
+.budgetten .toevoeg-formulier label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--zacht);
+}
+.budgetten .toevoeg-rij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.budgetten .toevoeg-rij input {
+  flex: 1 1 140px;
+  height: 52px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 17px;
+  color: var(--tekst);
+  background: #fff;
+  border: 1px solid var(--rand);
+  border-radius: 6px;
+}
+.budgetten .toevoeg-rij input[aria-invalid="true"] { border-color: #c9141f; }
+.budgetten .toevoeg-formulier .budgetten-fout { margin: 10px 0 0; }
+.budgetten .toevoeg-hint {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--zacht);
+}
+
 .budgetten .knop-rij {
   margin-top: 24px;
   display: flex;
@@ -144,43 +258,14 @@
   cursor: not-allowed;
 }
 
-/* Onderbalk */
-.budgetten .onderbalk {
-  position: sticky;
-  bottom: 0;
-  background: #fff;
-  border-top: 1px solid var(--lichtrand);
-  border-radius: 0 0 6px 6px;
-  padding: 26px 28px 34px;
-  display: flex;
-  justify-content: space-between;
-}
-.budgetten .onderbalk a {
-  color: var(--tekst);
-  font-size: 17px;
-  text-decoration: none;
-}
-.budgetten .onderbalk a.actief {
-  font-weight: 700;
-  color: var(--primair);
-  text-decoration: underline;
-  text-underline-offset: 6px;
+.budgetten .knop-primair.klein,
+.budgetten .knop-secundair.klein {
+  height: 52px;
+  min-height: 52px;
+  padding: 0 18px;
+  font-size: 16px;
 }
 
-.budgetten :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
-
-@media (max-width: 420px) {
-  .budgetten-kop { padding: 18px 14px 16px; }
-  .budgetten-kop h1 { font-size: 22px; }
-  .budgetten .maand-knop { width: 44px; height: 44px; }
-  .budgetten-inhoud { padding: 16px 14px 28px; }
-  .budgetten .kaart { padding: 20px 16px 26px; }
-  .budgetten .budget-rij { font-size: 15px; }
-  .budgetten .onderbalk { padding: 18px 14px 24px; }
-  .budgetten .onderbalk a { font-size: 14px; }
-}
-
-/* Formulier en berichten */
 .budgetten .budgetten-formulier {
   margin-top: 24px;
   display: flex;
@@ -220,4 +305,40 @@
   margin: 20px 0 0;
   font-size: 17px;
   color: var(--zacht);
+}
+
+.budgetten .onderbalk {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  border-top: 1px solid var(--lichtrand);
+  border-radius: 0 0 6px 6px;
+  padding: 26px 28px 34px;
+  display: flex;
+  justify-content: space-between;
+}
+.budgetten .onderbalk a {
+  color: var(--tekst);
+  font-size: 17px;
+  text-decoration: none;
+}
+.budgetten .onderbalk a.actief {
+  font-weight: 700;
+  color: var(--primair);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.budgetten :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
+
+@media (max-width: 420px) {
+  .budgetten-kop { padding: 18px 14px 16px; }
+  .budgetten-kop h1 { font-size: 22px; }
+  .budgetten .maand-knop { width: 44px; height: 44px; }
+  .budgetten-inhoud { padding: 16px 14px 28px; }
+  .budgetten .kaart { padding: 20px 16px 26px; }
+  .budgetten .budget-rij { font-size: 15px; gap: 8px; }
+  .budgetten .menu-lijst { min-width: 190px; }
+  .budgetten .onderbalk { padding: 18px 14px 24px; }
+  .budgetten .onderbalk a { font-size: 14px; }
 }
