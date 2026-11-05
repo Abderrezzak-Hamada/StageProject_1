@@ -16,6 +16,7 @@
   color: var(--tekst);
   background: var(--bg);
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   max-width: 680px;
@@ -116,23 +117,29 @@
   cursor: pointer;
 }
 
-.onderbalk {
-  display: flex;
-  justify-content: space-between;
-  padding: 24px 28px;
-  background: #fff;
-  border-top: 1px solid var(--rand-zacht);
-  position: sticky;
-  bottom: 0;
-}
-.onderbalk a, .onderbalk button { color: var(--tekst); text-decoration: none; font-size: 17px; }
-.onderbalk button { padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; }
-.onderbalk a.actief { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
-
 .start :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
 
 @media (max-width: 420px) {
+  .start-kop { gap: 8px; padding: 14px; }
+  .start-kop h1 {
+    flex: 1;
+    min-width: 0;
+    font-size: clamp(16px, 5vw, 20px);
+    line-height: 1.2;
+    text-align: center;
+  }
+  .maand-knop { flex: 0 0 44px; width: 44px; height: 44px; }
   .saldo { font-size: 40px; }
-  .onderbalk { padding: 20px 14px; }
-  .onderbalk a { font-size: 15px; }
+  .saldo-vakken { gap: 10px; }
+  .vak { padding: 12px 10px; }
+  .vak strong { font-size: 16px; }
+  .budget-rij { flex-direction: column; align-items: flex-start; gap: 3px; font-size: 15px; }
+  .budget-rij span + span { font-size: 14px; }
+  .transacties li { align-items: flex-start; gap: 8px; font-size: 15px; }
+  .transacties li span { min-width: 0; overflow-wrap: anywhere; }
+  .transacties li strong { flex: 0 0 auto; font-size: 14px; white-space: nowrap; }
+}
+
+@media (min-width: 421px) and (max-width: 600px) {
+  .start-kop h1 { font-size: clamp(18px, 5vw, 22px); }
 }

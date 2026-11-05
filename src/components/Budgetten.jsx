@@ -76,12 +76,7 @@ function waarschuwing(budgetten) {
 
 const hoofdletter = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export default function Budgetten({
-  onNaarStart,
-  onNaarTransacties,
-  onNaarSparen,
-  onNaarUitloggen,
-}) {
+export default function Budgetten() {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9);
   const [alleBudgetten, setAlleBudgetten] = useState(() => laad(OPSLAG_BUDGETTEN, BEGINDATA));
@@ -269,18 +264,6 @@ export default function Budgetten({
       [volgendeSleutel]: opgeslagen.map((b) => ({ ...b, besteed: 0 })),
     });
     setBericht(`Budgetten overgenomen naar ${volgendeNaam}.`);
-  }
-
-  function handleLogout(e) {
-    e.preventDefault();
-    onNaarUitloggen?.();
-  }
-
-  function nav(fn) {
-    return (e) => {
-      e.preventDefault();
-      fn?.();
-    };
   }
 
   return (
@@ -489,13 +472,6 @@ export default function Budgetten({
         )}
       </main>
 
-      <nav className="onderbalk">
-        <a href="#start" onClick={nav(onNaarStart)}>Start</a>
-        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
-        <a href="#budgetten" className="actief">Budgetten</a>
-        <a href="#sparen" onClick={nav(onNaarSparen)}>Sparen</a>
-        <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
-      </nav>
     </div>
   );
 }

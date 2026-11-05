@@ -15,6 +15,7 @@
   color: var(--tekst);
   background: #f6f5f3;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 680px;
   margin: 0 auto;
   display: flex;
@@ -307,28 +308,6 @@
   color: var(--zacht);
 }
 
-.budgetten .onderbalk {
-  position: sticky;
-  bottom: 0;
-  background: #fff;
-  border-top: 1px solid var(--lichtrand);
-  border-radius: 0 0 6px 6px;
-  padding: 26px 28px 34px;
-  display: flex;
-  justify-content: space-between;
-}
-.budgetten .onderbalk a {
-  color: var(--tekst);
-  font-size: 17px;
-  text-decoration: none;
-}
-.budgetten .onderbalk a.actief {
-  font-weight: 700;
-  color: var(--primair);
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
-
 .budgetten :focus-visible { outline: 3px solid var(--primair); outline-offset: 2px; }
 
 @media (max-width: 420px) {
@@ -339,6 +318,25 @@
   .budgetten .kaart { padding: 20px 16px 26px; }
   .budgetten .budget-rij { font-size: 15px; gap: 8px; }
   .budgetten .menu-lijst { min-width: 190px; }
-  .budgetten .onderbalk { padding: 18px 14px 24px; }
-  .budgetten .onderbalk a { font-size: 14px; }
+}
+
+@media (max-width: 600px) {
+  .budgetten .budget-rij {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    align-items: start;
+    gap: 4px 8px;
+  }
+  .budgetten .budget-rij .budget-naam {
+    overflow-wrap: anywhere;
+  }
+  .budgetten .budget-rij .budget-bedragen {
+    text-align: left;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+  .budgetten .budget-rij .budget-menu {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
 }

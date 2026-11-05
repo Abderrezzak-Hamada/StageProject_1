@@ -4,6 +4,7 @@
   --rand: #c9cdd2;
   --primair: #3d5170;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 680px;
   margin: 0 auto;
   overflow: hidden;
@@ -107,5 +108,13 @@
 
 @media (max-width: 540px) {
   .sorteren-kop, .sorteren-inhoud { padding-left: 20px; padding-right: 20px; }
-  .sorteren-kop h1 { font-size: 22px; }
+  .sorteren-pagina { border-radius: 0; }
+  .sorteren-kop { gap: 12px; padding-top: 14px; padding-bottom: 14px; }
+  .sorteren-kop h1 { min-width: 0; font-size: 19px; line-height: 1.25; overflow-wrap: anywhere; }
+  .sorteren-terug { flex: 0 0 48px; width: 48px; height: 48px; }
+  .sorteren-inhoud { padding-top: 20px; padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+  .sorteren-opties { padding: 0 14px; }
+  .sorteren-optie { gap: 12px; min-height: 60px; font-size: 16px; }
+  .sorteren-uitleg { font-size: 16px; }
+  .sorteren-voorbeeld { padding: 14px; }
 }

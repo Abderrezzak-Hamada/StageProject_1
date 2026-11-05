@@ -90,8 +90,6 @@ export default function Start({
   onNaarBudgetten,
   onNaarTransactie,
   onNaarTransacties,
-  onNaarSparen,
-  onNaarUitloggen,
 }) {
   const [jaar, setJaar] = useState(2026);
   const [maand, setMaand] = useState(9); // 0 = januari, 9 = oktober
@@ -110,21 +108,14 @@ export default function Start({
     setMaand(nieuw.getMonth());
   }
  
-  function handleLogout(e) {
-    e.preventDefault();
-    onNaarUitloggen?.();
-  }
-
   function handleNaarBudgetten(e) {
     e.preventDefault();
     onNaarBudgetten?.();
   }
 
-  function nav(fn) {
-    return (e) => {
-      e.preventDefault();
-      fn?.();
-    };
+  function handleNaarTransacties(e) {
+    e.preventDefault();
+    onNaarTransacties?.();
   }
 
   return (
@@ -180,7 +171,7 @@ export default function Start({
         <section className="kaart">
           <div className="kaart-kop">
             <h2>Laatste 5 transacties</h2>
-            <a href="#transacties">Alle</a>
+            <a href="#transacties" onClick={handleNaarTransacties}>Alle</a>
           </div>
           {data.transacties.length === 0 && <p className="leeg">Nog geen transacties deze maand.</p>}
           <ul className="transacties">
@@ -196,17 +187,11 @@ export default function Start({
         </section>
  
         <div className="knop-rij">
-          <button className="knop-primair">+ Transactie</button>
+          <button type="button" className="knop-primair" onClick={onNaarTransactie}>
+            + Transactie
+          </button>
         </div>
       </main>
- 
-      <nav className="onderbalk">
-        <a href="#start" className="actief">Start</a>
-        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
-        <a href="#budgetten" onClick={handleNaarBudgetten}>Budgetten</a>
-        <a href="#sparen" onClick={nav(onNaarSparen)}>Sparen</a>
-        <a href="#uitloggen" onClick={handleLogout}>Uitloggen</a>
-      </nav>
     </div>
   );
 }

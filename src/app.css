@@ -1,3 +1,236 @@
 body {
   margin: 0;
 }
+
+:root {
+  color-scheme: light;
+  color: #1c2233;
+  background: #f6f5f3;
+  font: 16px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
+  text-align: left;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.app-shell {
+  --app-navigatie-hoogte: calc(60px + env(safe-area-inset-bottom));
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: var(--app-navigatie-hoogte);
+}
+
+.app-shell > .start,
+.app-shell > .budgetten,
+.app-shell > .b-scherm,
+.app-shell > .transacties-pagina,
+.app-shell > .sorteren-pagina,
+.app-shell > .tv-pagina,
+.app-shell > .login,
+.app-shell > .signup,
+.app-shell > .uitloggen-pagina {
+  min-height: calc(100dvh - var(--app-navigatie-hoogte));
+}
+
+.app-shell > .uitloggen-pagina .uitloggen {
+  min-height: calc(100dvh - var(--app-navigatie-hoogte) - 18px);
+}
+
+@keyframes scherm-verschijnt {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kaart-verschijnt {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navigatie-verschijnt {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navigatie-actief {
+  0% {
+    transform: scale(0.94);
+  }
+  65% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes voortgang-vult {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.app-shell > :not(.app-navigatie) {
+  animation: scherm-verschijnt 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.app-navigatie {
+  animation: navigatie-verschijnt 500ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.app-navigatie button,
+.app-shell button {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.app-shell button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(28, 34, 51, 0.12);
+}
+
+.app-shell button:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+}
+
+.app-shell input,
+.app-shell select,
+.app-shell textarea {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.app-shell input:focus,
+.app-shell select:focus,
+.app-shell textarea:focus {
+  box-shadow: 0 0 0 4px rgba(61, 79, 110, 0.13);
+}
+
+.start .kaart,
+.budgetten .kaart,
+.b-scherm .b-kaart,
+.transacties-pagina .inkomsten-totaal,
+.transacties-pagina .categorie-totaal,
+.transacties-pagina .categorie-overzicht,
+.transacties-pagina .transacties-lijst,
+.sorteren-pagina .sorteren-opties,
+.sorteren-pagina .sorteren-voorbeeld,
+.tv,
+.login-kaart,
+.signup__card,
+.uitloggen__kaart {
+  animation: kaart-verschijnt 520ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.start .start-inhoud > .kaart:nth-of-type(2),
+.budgetten .budgetten-inhoud > .kaart:nth-child(2),
+.b-scherm .b-main > .b-kaart:nth-of-type(2),
+.transacties-pagina .transacties-lijst,
+.sorteren-pagina .sorteren-voorbeeld {
+  animation-delay: 80ms;
+}
+
+.start .start-inhoud > .kaart:nth-of-type(3),
+.budgetten .budgetten-inhoud > .kaart:nth-child(3),
+.b-scherm .b-main > .b-kaart:nth-of-type(3) {
+  animation-delay: 150ms;
+}
+
+.start .balk-vulling,
+.budgetten .balk-vulling,
+.b-scherm .b-balk-vul,
+.categorie-balk span {
+  transform-origin: left center;
+  animation: voortgang-vult 900ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.transactie-regel,
+.transacties li,
+.budget {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease;
+}
+
+.transactie-regel:hover,
+.transacties li:hover,
+.budget:hover {
+  transform: translateX(3px);
+}
+
+.app-navigatie button.actief {
+  animation: navigatie-actief 360ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

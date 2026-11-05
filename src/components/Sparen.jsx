@@ -201,12 +201,7 @@ function Toevoegen({ onKlaar }) {
 }
 
 /* ---------- hoofdscherm ---------- */
-export default function Sparen({
-  onNaarStart,
-  onNaarTransacties,
-  onNaarBudgetten,
-  onNaarUitloggen,
-}) {
+export default function Sparen() {
   const [scherm, setScherm] = useState({ naam: 'lijst' })
   const [doelen, setDoelen] = useState(getDoelen)
 
@@ -217,10 +212,8 @@ export default function Sparen({
   if (scherm.naam === 'opnemen') return <Opnemen doel={actief(scherm.id)} onKlaar={terug} />
   if (scherm.naam === 'toevoegen') return <Toevoegen onKlaar={terug} />
 
-  const nav = (fn) => (e) => { e.preventDefault(); fn?.() }
-
   return (
-    <div className="b-scherm s-met-nav">
+    <div className="b-scherm">
       <header className="b-header"><h1>Spaardoelen</h1></header>
       <main className="b-main">
         {doelen.map((d) => {
@@ -251,13 +244,6 @@ export default function Sparen({
         <button className="b-knop b-knop--primair" onClick={() => setScherm({ naam: 'toevoegen' })}>+ Spaardoel</button>
       </main>
 
-      <nav className="onderbalk">
-        <a href="#start" onClick={nav(onNaarStart)}>Start</a>
-        <a href="#transacties" onClick={nav(onNaarTransacties)}>Transacties</a>
-        <a href="#budgetten" onClick={nav(onNaarBudgetten)}>Budgetten</a>
-        <a href="#sparen" className="actief" onClick={(e) => e.preventDefault()}>Sparen</a>
-        <a href="#uitloggen" onClick={nav(onNaarUitloggen)}>Uitloggen</a>
-      </nav>
     </div>
   )
 }

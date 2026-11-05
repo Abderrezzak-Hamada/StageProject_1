@@ -10,6 +10,7 @@ import SortTransactions from "./components/SortTransactions.jsx";
 import Budgetten from "./components/Budgetten.jsx";
 import Uitloggen from "./components/Uitloggen.jsx";
 import Sparen from "./components/Sparen.jsx";
+import AppNavigation from "./components/AppNavigation.jsx";
  
 export default function App() {
   const [pagina, setPagina] = useState(() =>
@@ -40,41 +41,27 @@ export default function App() {
     setPagina("login");
   }
  
+  let inhoud;
+
   if (pagina === "signup") {
-    return (
+    inhoud = (
       <SignUp
         onRegister={handleRegister}
         onLogin={() => setPagina("login")}
       />
     );
-  }
- 
-  if (pagina === "start") {
-    return (
+  } else if (pagina === "start") {
+    inhoud = (
       <Start
         onNaarBudgetten={() => setPagina("budgetten")}
         onNaarTransactie={() => setPagina("transactie")}
-        onNaarSorteren={() => setPagina("sorteren")}
         onNaarTransacties={() => setPagina("transacties")}
-        onNaarSparen={() => setPagina("sparen")}
-        onNaarUitloggen={() => setPagina("uitloggen")}
-        />
-    )
-  }
-
-  if (pagina === "budgetten") {
-    return (
-      <Budgetten
-        onNaarStart={() => setPagina("start")}
-        onNaarTransacties={() => setPagina("transacties")}
-        onNaarSparen={() => setPagina("sparen")}
-        onNaarUitloggen={() => setPagina("uitloggen")}
       />
     );
-  }
-
-  if (pagina === "sorteren") {
-    return (
+  } else if (pagina === "budgetten") {
+    inhoud = <Budgetten />;
+  } else if (pagina === "sorteren") {
+    inhoud = (
       <SortTransactions
         huidigeSortering={sorteringen[sorteerFilter] || "nieuwste"}
         onToepassen={(nieuweSortering) => {
@@ -87,30 +74,22 @@ export default function App() {
         onAnnuleren={() => setPagina("transacties")}
       />
     );
-  }
-
-  if (pagina === "transacties") {
-    return (
+  } else if (pagina === "transacties") {
+    inhoud = (
       <Transactions
         transacties={transacties}
         initialFilter={transactiesFilter}
         onFilterChange={setTransactiesFilter}
-        onNaarStart={() => setPagina("start")}
-        onNaarBudgetten={() => setPagina("budgetten")}
-        onNaarSparen={() => setPagina("sparen")}
         onNaarTransactie={() => setPagina("transactie")}
         onNaarSorteren={(filter) => {
           setSorteerFilter(filter);
           setPagina("sorteren");
         }}
-        onNaarUitloggen={() => setPagina("uitloggen")}
         sorteringen={sorteringen}
       />
     );
-  }
-
-  if (pagina === "transactie") {
-    return (
+  } else if (pagina === "transactie") {
+    inhoud = (
       <AddTransaction
         onOpslaan={async (transactie) => {
           setTransacties((huidige) => [
@@ -129,32 +108,37 @@ export default function App() {
 
       />
     );
-  }
- 
-  if (pagina === "sparen") {
-    return (
-      <Sparen
-        onNaarStart={() => setPagina("start")}
-        onNaarTransacties={() => setPagina("transacties")}
-        onNaarBudgetten={() => setPagina("budgetten")}
-        onNaarUitloggen={() => setPagina("uitloggen")}
-      />
-    );
-  }
- 
-  if (pagina === "uitloggen") {
-    return (
+  } else if (pagina === "sparen") {
+    inhoud = <Sparen />;
+  } else if (pagina === "uitloggen") {
+    inhoud = (
       <Uitloggen
         onUitloggen={handleUitloggen}
         onAnnuleren={() => setPagina("start")}
       />
     );
+  } else {
+    inhoud = (
+      <Login
+        onLogin={handleLogin}
+        onNaarRegistreren={() => setPagina("signup")}
+      />
+    );
   }
- 
+
+  const actievePagina = {
+    transactie: "transacties",
+    sorteren: "transacties",
+  }[pagina] || (["login", "signup"].includes(pagina) ? null : pagina);
+
   return (
-    <Login
-      onLogin={handleLogin}
-      onNaarRegistreren={() => setPagina("signup")}
-    />
+    <div className="app-shell">
+      {inhoud}
+      <AppNavigation
+        actievePagina={actievePagina}
+        uitgeschakeld={!getHuidigeGebruiker()}
+        onNavigeren={setPagina}
+      />
+    </div>
   );
 }

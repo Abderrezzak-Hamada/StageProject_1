@@ -1,6 +1,7 @@
 .tv-pagina {
   box-sizing: border-box;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 9px 21px 9px 22px;
   background: #ebebe9;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -240,4 +241,19 @@ select.tv-invoer {
 .tv-knop:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (max-width: 540px) {
+  .tv-pagina { padding: 0; }
+  .tv { min-height: 100vh; min-height: 100dvh; border-radius: 0; }
+  .tv-kop { gap: 12px; padding: 14px 16px; }
+  .tv-kop h1 { min-width: 0; font-size: 19px; line-height: 1.25; overflow-wrap: anywhere; }
+  .tv-terug { flex: 0 0 48px; width: 48px; height: 48px; }
+  .tv-formulier { padding: 20px 16px calc(24px + env(safe-area-inset-bottom)); }
+  .tv-type { gap: 8px; }
+  .tv-type button { min-width: 0; height: 52px; font-size: 16px; }
+  .tv-invoer { min-width: 0; font-size: 16px; }
+  .tv-bedrag { font-size: 24px; }
+  .tv-vast { gap: 12px; margin: 4px 0 28px; }
+  .tv-vast label { font-size: 16px; }
 }

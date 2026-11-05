@@ -1,6 +1,7 @@
 .uitloggen-pagina {
   box-sizing: border-box;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 7px 14px 11px 17px;
   background: #ebebe9;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -11,7 +12,8 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 700px;
-  min-height: 743px;
+  min-height: calc(100vh - 18px);
+  min-height: calc(100dvh - 18px);
   margin: 0 auto;
   background: #f6f6f5;
   border-radius: 24px;
@@ -117,4 +119,16 @@
 .knop:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (max-width: 540px) {
+  .uitloggen-pagina { padding: 0; }
+  .uitloggen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+  .uitloggen__kop { min-height: 64px; height: auto; padding: 12px 18px; }
+  .uitloggen__inhoud { padding: 20px 16px; }
+  .uitloggen__kaart { padding: 26px 18px 20px; }
 }

@@ -5,6 +5,7 @@
   --achtergrond: #f7f7f6;
   --primair: #3d5170;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 680px;
   margin: 0 auto;
   overflow: hidden;
@@ -157,14 +158,20 @@
 .categorie-overzicht + .categorie-beheren + .transactie-actie { margin-top: 53px; }
 .transactie-toevoegen { padding: 18px 29px; border: 0; border-radius: 8px; background: var(--primair); color: #fff; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
 
-.transacties-onderbalk { display: flex; justify-content: space-between; padding: 24px 44px; border-top: 1px solid var(--rand); background: #fff; }
-.transacties-onderbalk button { border: 0; background: transparent; color: var(--tekst); font: inherit; font-size: 17px; cursor: pointer; }
-.transacties-onderbalk .actief { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
 .transacties-pagina :focus-visible { outline: 3px solid #315c9b; outline-offset: 2px; }
 
 @media (max-width: 540px) {
   .transacties-kop, .transacties-inhoud { padding-left: 20px; padding-right: 20px; }
-  .filterknop { padding: 0 12px; font-size: 15px; }
-  .transacties-onderbalk { padding-left: 14px; padding-right: 14px; }
-  .transacties-onderbalk button { font-size: 14px; }
+  .transacties-kop { gap: 10px; padding-top: 14px; padding-bottom: 14px; }
+  .transacties-kop h1 { min-width: 0; font-size: clamp(17px, 5vw, 22px); text-align: center; }
+  .transacties-maandknop { flex: 0 0 44px; width: 44px; height: 44px; }
+  .transactie-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .filterknop { min-height: 44px; padding: 8px 10px; font-size: 15px; }
+  .categorie-overzicht { padding: 16px; }
+  .categorie-regel-kop { grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; }
+  .categorie-regel-kop strong { min-width: 0; overflow-wrap: anywhere; font-size: 16px; }
+  .categorie-regel-kop span { font-size: 15px; white-space: nowrap; }
+  .transactie-details { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; font-size: 16px; }
+  .transactie-details > span { min-width: 0; overflow-wrap: anywhere; }
+  .bedrag { font-size: 16px; }
 }
