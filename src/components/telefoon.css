@@ -1,0 +1,109 @@
+/* Telefoon-layout voor de hele app.
+   Importeer in App.jsx (of main.jsx) NA je andere css:  import "./telefoon.css";  */
+ 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+ 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+ 
+body {
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  background: #e9ecef; /* achtergrond naast de telefoon op desktop */
+}
+ 
+/* De telefoon-container */
+.app-shell {
+  width: 100%;
+  max-width: 430px;
+  height: 100dvh;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+ 
+.app-shell > * {
+  max-width: 100%;
+}
+.app-shell img,
+.app-shell svg,
+.app-shell video,
+.app-shell table {
+  max-width: 100%;
+}
+.app-shell table {
+  display: block;
+  overflow-x: auto;
+}
+ 
+/* Invoervelden en knoppen */
+.app-shell input,
+.app-shell select,
+.app-shell textarea {
+  width: 100%;
+  min-height: 46px;
+  font-size: 16px;
+}
+.app-shell input[type="checkbox"],
+.app-shell input[type="radio"] {
+  width: auto;
+  min-height: 0;
+}
+.app-shell button {
+  min-height: 44px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+ 
+/* Onderbalk: Start / Transacties / Budgetten / Sparen / Uitloggen
+   elk even breed, verdeeld over de hele breedte */
+.app-shell nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 4px;
+}
+.app-shell nav > * {
+  flex: 1;
+  text-align: center;
+  padding: 14px 2px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+ 
+.app-shell footer {
+  max-width: 100%;
+}
+ 
+/* Kleine schermen */
+@media (max-width: 400px) {
+  .app-shell { font-size: 15px; }
+  .app-shell nav > * { font-size: 0.8rem; }
+}
+ 
+/* Op een echte telefoon: geen grijze rand */
+@media (max-width: 430px) {
+  body { background: #fff; }
+}
+ 
+/* Op desktop: telefoon-frame */
+@media (min-width: 431px) {
+  .app-shell {
+    height: min(100dvh, 900px);
+    margin-top: max(0px, calc((100dvh - 900px) / 2));
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  }
+}

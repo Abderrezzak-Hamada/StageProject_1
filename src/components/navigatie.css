@@ -1,0 +1,48 @@
+/* Eén onderbalk voor alle pagina's: 5 gelijke vakken over de hele breedte */
+.app-shell nav.onderbalk,
+nav.onderbalk {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  border-top: 1px solid #dcdfe3;
+}
+
+.app-shell nav.onderbalk .onderbalk-item,
+nav.onderbalk .onderbalk-item {
+  flex: 1 1 0;              /* alle vijf even breed */
+  min-width: 0;
+  width: auto;
+  min-height: 56px;
+  padding: 0 2px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+nav.onderbalk .onderbalk-item.actief {
+  font-weight: 700;
+}
+nav.onderbalk .onderbalk-item.actief span,
+nav.onderbalk .onderbalk-item.actief {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 400px) {
+  nav.onderbalk .onderbalk-item { font-size: 0.78rem; }
+}

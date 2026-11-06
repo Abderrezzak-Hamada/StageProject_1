@@ -1,0 +1,58 @@
+GEBRUIK VAN DE NIEUWE ONDERBALK
+
+Doe dit in ELKE pagina met de onderbalk: Start.jsx, Transacties (transactions.jsx),
+Budgetten.jsx en Sparen.jsx.
+
+1) Bovenaan het bestand:
+
+   import Navigatie from "./Navigatie.jsx";
+
+2) Haal de oude onderbalk weg (de <nav>/<div> met Start, Transacties, Budgetten,
+   Sparen, Uitloggen) en zet op die plek:
+
+--- transactions.jsx ---
+<Navigatie
+  actief="transacties"
+  onNaarStart={onNaarStart}
+  onNaarBudgetten={onNaarBudgetten}
+  onNaarSparen={onNaarSparen}
+  onNaarUitloggen={onNaarUitloggen}
+/>
+
+--- Budgetten.jsx ---
+<Navigatie
+  actief="budgetten"
+  onNaarStart={onNaarStart}
+  onNaarTransacties={onNaarTransacties}
+  onNaarSparen={onNaarSparen}
+  onNaarUitloggen={onNaarUitloggen}
+/>
+
+--- Sparen.jsx ---
+<Navigatie
+  actief="sparen"
+  onNaarStart={onNaarStart}
+  onNaarTransacties={onNaarTransacties}
+  onNaarBudgetten={onNaarBudgetten}
+  onNaarUitloggen={onNaarUitloggen}
+/>
+
+--- Start.jsx ---
+<Navigatie
+  actief="start"
+  onNaarTransacties={onNaarTransacties}
+  onNaarBudgetten={onNaarBudgetten}
+  onNaarSparen={onNaarSparen}
+  onNaarUitloggen={onNaarUitloggen}
+/>
+
+3) Zet de balk als LAATSTE element binnen de pagina (onder de inhoud).
+
+4) Verwijder in de css van die pagina's de oude stijl van de onderbalk, anders
+   botst die met de nieuwe.
+
+5) Budgetten.jsx en Sparen.jsx krijgen in App.jsx nu niet alle handlers mee.
+   Voeg in App.jsx toe waar ze ontbreken:
+   - bij <Budgetten ... />:  onNaarBudgetten is niet nodig (je bent er al).
+   - bij <Sparen ... />:     onNaarBudgetten is al aanwezig.
+   - bij <Transactions ... /> staat alles al goed.

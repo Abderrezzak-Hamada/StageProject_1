@@ -1,0 +1,28 @@
+WIJZIGING IN src/App.jsx (3 stappen)
+
+1) Bovenaan bij de imports toevoegen:
+
+   import "./telefoon.css";
+
+2) Verander deze regel:
+
+   export default function App() {
+
+   naar:
+
+   function AppInhoud() {
+
+3) Plak helemaal onderaan het bestand, na de laatste }:
+
+   export default function App() {
+     return (
+       <div className="app-shell">
+         <AppInhoud />
+       </div>
+     );
+   }
+
+Verder niets aan App.jsx veranderen.
+
+Controleer ook index.html, in <head> moet staan:
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
