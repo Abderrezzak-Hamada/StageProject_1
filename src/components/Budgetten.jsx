@@ -303,7 +303,7 @@ export default function Budgetten({
             <p className="leeg">Nog geen budgetten in {MAANDEN[maand].toLowerCase()}. Stel je eerste budget in.</p>
           )}
           {budgetten.map((b) => (
-            <div className="budget" key={b.naam}>
+            <div className={`budget${menuOpen === b.naam ? " budget--menu-open" : ""}`} key={b.naam}>
               <div className="budget-rij">
                 <span className="budget-naam">{b.naam}</span>
                 <span className="budget-bedragen">
